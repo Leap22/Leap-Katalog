@@ -7,7 +7,7 @@
 
 /* Styling Dasar Halaman */
 body {
-    font-family: 'Lato', sans-serif; /* Font bersih dan modern */
+    font-family: 'Lato', sans-serif; 
     margin: 0;
     padding: 25px;
     background-color: #F7F7F7; /* Background Putih Gading Hangat */
@@ -65,7 +65,7 @@ header h2 {
 /* Styling untuk Kartu Stok Habis */
 .kartu-produk.stok-habis {
     opacity: 0.6;
-    background-color: #fffaf0; /* Lebih lembut */
+    background-color: #fffaf0; 
     border: 2px dashed #C87C5C; 
 }
 
@@ -143,7 +143,7 @@ header h2 {
     font-weight: 600;
 }
 
-/* Tombol Sosial Media Container */
+/* Tombol Sosial Media Container (SIMETRI FIX) */
 .tombol-sosial-container {
     display: flex;
     flex-direction: column;
@@ -154,9 +154,11 @@ header h2 {
 .tombol-sosial {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* Simetris di tengah */
     width: 100%;
-    padding: 14px; /* Lebih besar dan menonjol */
+    max-width: 250px; /* Batasi lebar untuk kerapian di layar besar */
+    margin: 0 auto; /* Tengah secara horizontal */
+    padding: 12px 15px;
     text-align: center;
     color: white;
     text-decoration: none;
@@ -169,6 +171,8 @@ header h2 {
 .tombol-sosial i {
     margin-right: 10px;
     font-size: 1.3em;
+    width: 20px; /* Memberi lebar tetap pada ikon */
+    text-align: center;
 }
 
 /* Styling Khusus Tombol Sosial Media */
