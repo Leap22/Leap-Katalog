@@ -36,7 +36,7 @@ function tampilkanProduk(produkArray) {
             </div>
             <p><strong>KODE SKU:</strong> <span class="kode-sku">${produk.kode_sku}</span></p>
                 
-                <a href="https://wa.me/[Nomor WA Kalian]?text=Halo%2C%20saya%20tertarik%20dengan%20produk%20${produk.kode_sku}%20yang%20saya%20lihat%20di%20website." target="_blank" class="tombol-wa">
+                <a href="https://wa.me/[85512345678]?text=Halo%2C%20saya%20tertarik%20dengan%20produk%20${produk.kode_sku}%20yang%20saya%20lihat%20di%20website." target="_blank" class="tombol-wa">
                     Pesan via WhatsApp
                 </a>
             </div> `;
@@ -47,4 +47,5 @@ function tampilkanProduk(produkArray) {
 }
 
 // Panggil fungsi utama saat halaman dimuat
+
 ambilDataProduk();
