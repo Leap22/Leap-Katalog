@@ -1,0 +1,35 @@
+backend:
+  name: git-gateway
+  branch: main # Ganti jika branch utama GitHub Anda bukan 'main'
+
+media_folder: "assets/uploads" # Lokasi gambar yang diunggah
+public_folder: "/assets/uploads" # Path publik untuk gambar
+
+collections:
+  - name: "katalog" 
+    label: "🛒 Katalog Produk" 
+    folder: "/" # Cari file di root folder
+    format: json # Format file adalah JSON
+    file: "katalog_produk.json" # Edit file ini
+    
+    fields: 
+      - label: "Daftar Produk"
+        name: "products"
+        widget: "list"
+        summary: "{{fields.nama_produk_id}} - ฿ {{fields.harga.thb}}"
+        
+        fields:
+          - {label: "Kode SKU", name: "kode_sku", widget: "string", required: true}
+          - label: "Link Foto Utama"
+            name: "link_foto_utama"
+            widget: "image" # <-- INI SOLUSI IMAGE UPLOADER!
+            allow_multiple: false
+            media_library:
+              max_file_size: 2000000 # Batas 2MB
+          - label: "Nama Produk (ID)", name: "nama_produk_id", widget: "string", required: true
+          
+          # Edit Harga - Mengakses properti bersarang
+          - label: "Harga (THB)", name: ["harga", "thb"], widget: "number", value_type: "float", min: 1.0, required: true
+          - label: "Harga (IDR)", name: ["harga", "idr"], widget: "number", value_type: "int", min: 100, required: true
+          - {label: "Stok Tersedia?", name: "stok_tersedia", widget: "boolean", default: true}
+          # Tambahkan field lain sesuai struktur JSON Anda di sini...
