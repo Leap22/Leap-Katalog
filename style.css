@@ -1,0 +1,120 @@
+/* Styling Dasar Halaman */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Header/Judul */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    color: #075E54; /* Warna hijau WhatsApp */
+}
+
+/* Container Produk - Mengatur Grid */
+#container-produk {
+    display: grid;
+    /* Membuat layout responsif: 2 kolom di desktop, 1 kolom di mobile */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Kartu Produk */
+.kartu-produk {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.kartu-produk:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.kartu-produk img {
+    width: 100%;
+    height: 250px; /* Tinggi gambar tetap */
+    object-fit: cover; /* Memastikan gambar terpotong rapi */
+}
+
+/* Detail Produk (Teks) */
+.detail-produk {
+    padding: 20px;
+}
+
+.detail-produk h2 {
+    color: #333;
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+/* Nama Produk Tambahan (Khmer/Inggris) */
+.nama-tambahan {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+/* Deskripsi Singkat */
+.deskripsi {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Harga Multi-Currency */
+.multi-currency-price {
+    margin: 15px 0;
+    padding: 10px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.harga {
+    margin: 5px 0;
+}
+
+.harga.utama {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #25D366; /* Hijau Terang untuk harga utama (THB) */
+}
+
+.harga.kecil {
+    font-size: 0.9em;
+    color: #888;
+}
+
+/* Tombol WhatsApp */
+.tombol-wa {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    text-align: center;
+    background-color: #25D366; /* Hijau WhatsApp */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.tombol-wa:hover {
+    background-color: #1EBE4A;
+}
