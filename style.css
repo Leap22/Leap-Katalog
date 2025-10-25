@@ -1,4 +1,8 @@
-/* Palet Warna Tema "Tropical Modern Oasis":
+/* ========================================================== */
+/* TEMA: TROPICAL MODERN OASIS */
+/* ========================================================== */
+
+/* Palet Warna Tema:
    - Background: Putih Gading (#F7F7F7)
    - Primer (Aksen): Hijau Daun (#228B22)
    - Sekunder (Hangat): Terakota/Coklat Muda (#C87C5C)
@@ -37,9 +41,10 @@ header h2 {
     font-weight: 500;
 }
 
-/* Container Produk - Mengatur Grid */
+/* Container Produk - Mengatur Grid (Desktop/Tablet) */
 #container-produk {
     display: grid;
+    /* Default: 3 atau 4 kolom (min 320px) */
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
     gap: 30px;
     max-width: 1200px;
@@ -202,4 +207,68 @@ footer {
     font-size: 0.9em;
     color: #666;
     background-color: white;
+}
+
+/* ========================================================== */
+/* MEDIA QUERIES (RESPONSIVE DESIGN - MOBILE FIX) */
+/* ========================================================== */
+
+/* Tampilan untuk perangkat dengan lebar layar hingga 768px (Tablet dan Mobile) */
+@media (max-width: 768px) {
+    
+    body {
+        padding: 15px; /* Kurangi padding body di HP */
+    }
+    
+    /* Mengubah Container Produk menjadi 2 Kolom di HP/Tablet (LEBIH PADAT) */
+    #container-produk {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+        gap: 15px; /* Jarak antar kartu lebih kecil di HP */
+    }
+
+    .kartu-produk img {
+        height: 160px; /* Kurangi tinggi gambar agar kartu lebih ringkas */
+    }
+    
+    .detail-produk {
+        padding: 10px; /* Padding lebih kecil */
+    }
+    
+    .detail-produk h2 {
+        font-size: 1.2em; /* Ukuran font lebih kecil */
+        margin-bottom: 3px;
+    }
+
+    .nama-tambahan {
+        font-size: 0.75em;
+    }
+    
+    /* Sembunyikan elemen yang membuat kartu terlalu panjang di HP */
+    .deskripsi, .poin-jual-leap, .harga.kecil {
+        display: none; 
+    }
+    
+    .multi-currency-price {
+        margin: 10px 0; /* Kurangi margin harga */
+        padding: 5px;
+    }
+
+    .harga.utama {
+        font-size: 1.1em; /* Harga utama tetap menonjol */
+    }
+    
+    .tombol-sosial-container {
+        gap: 6px;
+    }
+
+    .tombol-sosial {
+        padding: 8px; /* Tombol sangat ringkas */
+        font-size: 0.85em;
+        max-width: none; /* Tombol mengisi penuh kolom 2 kolom */
+    }
+
+    .tombol-sosial i {
+        margin-right: 5px;
+        width: auto;
+    }
 }
