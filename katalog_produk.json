@@ -1,0 +1,162 @@
+[
+  {
+    "kode_sku": "MRS001",
+    "nama_produk_id": "Kopi Susu Gula Aren Dingin",
+    "nama_produk_en": "Iced Palm Sugar Milk Coffee",
+    "nama_produk_kh": "កាហ្វេទឹកដោះគោត្នោតត្រជាក់",
+    "kategori": "Minuman Racikan & Segar",
+    "stok_tersedia": true,
+    "deskripsi_singkat_id": "Kopi Arabika fresh brew dengan creamy susu dan manis alami gula aren.",
+    "poin_kunci_untuk_leap": [
+      "Dibuat saat dipesan (Freshly made)",
+      "Pilihan Es atau Hangat",
+      "Sangat cocok untuk penat kerja"
+    ],
+    "link_foto_utama": "https://kopisetempat.com/wp-content/uploads/2024/04/es-kopi-gula-aren-semakin-dicintai-di-2020-7ZDbUVOjpH.jpg",
+    "harga": {
+      "thb": 45.00,
+      "khr": 5500,
+      "idr": 20000
+    }
+  },
+  {
+    "kode_sku": "MRS002",
+    "nama_produk_id": "Jus Mangga Harum Manis",
+    "nama_produk_en": "Aromatic Sweet Mango Juice",
+    "nama_produk_kh": "ទឹកស្វាយផ្អែមក្រអូប",
+    "kategori": "Minuman Racikan & Segar",
+    "stok_tersedia": true,
+    "deskripsi_singkat_id": "Jus segar dari mangga matang pilihan, kental dan manis alami.",
+    "poin_kunci_untuk_leap": [
+      "Menggunakan buah segar pilihan",
+      "Tanpa tambahan pemanis buatan",
+      "Penyegar di hari yang panas"
+    ],
+    "link_foto_utama": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2021/7/7/09674920-4983-4cae-804a-0512450ebd2a.jpg",
+    "harga": {
+      "thb": 60.00,
+      "khr": 7000,
+      "idr": 27000
+    }
+  },
+  {
+    "kode_sku": "MK003",
+    "nama_produk_id": "Susu Kaleng Bear Brand (Original)",
+    "nama_produk_en": "Bear Brand Canned Milk (Original)",
+    "nama_produk_kh": "ទឹកដោះគោខ្លាឃ្មុំ (ដើម)",
+    "kategori": "Minuman Kemasan & Kaleng",
+    "stok_tersedia": true,
+    "deskripsi_singkat_id": "Susu steril siap minum dalam kaleng. Cocok untuk meningkatkan stamina.",
+    "poin_kunci_untuk_leap": [
+      "Stok selalu baru",
+      "Sangat digemari pekerja shift",
+      "Tersedia dingin (Siap minum)"
+    ],
+    "link_foto_utama": "placeholder_bearbrand.jpg",
+    "harga": {
+      "thb": 28.00,
+      "khr": 3500,
+      "idr": 12500
+    }
+  },
+  {
+    "kode_sku": "MK008",
+    "nama_produk_id": "Minuman Soda Kaleng (Cola Import)",
+    "nama_produk_en": "Imported Cola Canned Soda",
+    "nama_produk_kh": "កូឡាកំប៉ុងនាំចូល",
+    "kategori": "Minuman Kemasan & Kaleng",
+    "stok_tersedia": false,
+    "deskripsi_singkat_id": "Soda kola kaleng dingin dari merek internasional. Sangat menyegarkan.",
+    "poin_kunci_untuk_leap": [
+      "Stok sedang menipis",
+      "Tersedia rasa original & lemon",
+      "Wajib coba di siang hari"
+    ],
+    "link_foto_utama": "placeholder_soda.jpg",
+    "harga": {
+      "thb": 20.00,
+      "khr": 2500,
+      "idr": 9000
+    }
+  },
+  {
+    "kode_sku": "SNK005",
+    "nama_produk_id": "Keripik Kentang Rasa Pedas Manis",
+    "nama_produk_en": "Sweet and Spicy Potato Chips",
+    "nama_produk_kh": "បន្ទះសៀគ្វីដំឡូងហឹរ",
+    "kategori": "Makanan Ringan (Snack)",
+    "stok_tersedia": true,
+    "deskripsi_singkat_id": "Keripik kentang renyah dengan bumbu pedas manis yang bikin ketagihan.",
+    "poin_kunci_untuk_leap": [
+      "Level pedas pas (medium)",
+      "Kemasan Family Pack",
+      "Ideal untuk teman nonton"
+    ],
+    "link_foto_utama": "placeholder_chips.jpg",
+    "harga": {
+      "thb": 55.00,
+      "khr": 6800,
+      "idr": 25000
+    }
+  },
+  {
+    "kode_sku": "SNK010",
+    "nama_produk_id": "Biskuit Gandum Cokelat",
+    "nama_produk_en": "Chocolate Wheat Biscuits",
+    "nama_produk_kh": "នំស្រូវសាលីសូកូឡា",
+    "kategori": "Makanan Ringan (Snack)",
+    "stok_tersedia": true,
+    "deskripsi_singkat_id": "Biskuit gandum berserat tinggi dengan lapisan cokelat yang lezat.",
+    "poin_kunci_untuk_leap": [
+      "Baik untuk pencernaan",
+      "Rendah gula",
+      "Camilan sehat untuk pagi hari"
+    ],
+    "link_foto_utama": "placeholder_biskuit.jpg",
+    "harga": {
+      "thb": 35.00,
+      "khr": 4300,
+      "idr": 16000
+    }
+  },
+  {
+    "kode_sku": "BUA001",
+    "nama_produk_id": "Apel Fuji Merah (Per Pcs)",
+    "nama_produk_en": "Red Fuji Apple (Per Pcs)",
+    "nama_produk_kh": "ផ្លែប៉ោមហ្វូជីក្រហម (១ គ្រាប់)",
+    "kategori": "Buah & Segar",
+    "stok_tersedia": true,
+    "deskripsi_singkat_id": "Apel Fuji segar, renyah, dan manis. Dijual per buah.",
+    "poin_kunci_untuk_leap": [
+      "Stok didatangkan setiap hari",
+      "Ukuran besar",
+      "Sangat cocok untuk pencuci mulut"
+    ],
+    "link_foto_utama": "placeholder_apel.jpg",
+    "harga": {
+      "thb": 15.00,
+      "khr": 1800,
+      "idr": 7000
+    }
+  },
+  {
+    "kode_sku": "BUA005",
+    "nama_produk_id": "Pisang Ambon (Per Sisir)",
+    "nama_produk_en": "Ambonese Banana (Per Bunch)",
+    "nama_produk_kh": "ចេកអំបូង (មួយស្និត)",
+    "kategori": "Buah & Segar",
+    "stok_tersedia": true,
+    "deskripsi_singkat_id": "Pisang Ambon matang pohon, manis, dan bergizi tinggi. Dijual per sisir.",
+    "poin_kunci_untuk_leap": [
+      "Sumber kalium dan energi",
+      "Tingkat kematangan sempurna",
+      "Ideal untuk sarapan"
+    ],
+    "link_foto_utama": "placeholder_pisang.jpg",
+    "harga": {
+      "thb": 40.00,
+      "khr": 5000,
+      "idr": 18000
+    }
+  }
+]
