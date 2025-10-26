@@ -4,24 +4,138 @@ let daftarProduk = [];
 let keranjang = {}; 
 const MIN_PEMBELIAN_THB = 500; // Kunci validasi
 
+// ==========================================================
+// VARIABEL UNTUK FILTER KATEGORI & PENCARIAN
+// ==========================================================
+let kategoriAktif = 'Semua'; // Kategori yang sedang dipilih secara default
+const filterContainer = document.getElementById('filter-container');
+
+
+// ==========================================================
+// PENGAMBILAN DATA, FILTER & PENCARIAN
+// ==========================================================
+
 // Fungsi untuk mengambil data dari file JSON
 function ambilDataProduk() {
     fetch('katalog_produk.json')
         .then(response => response.json())
         .then(data => {
             daftarProduk = data; // Simpan data produk secara global
-            tampilkanProduk(data);
+            renderFilterKategori(); 
+            filterUtama(); // Panggil filterUtama (tanpa parameter) untuk menampilkan semua produk
+            inisialisasiPencarian(); // Inisialisasi listener pencarian
         })
         .catch(error => {
             console.error('Ada kesalahan saat mengambil data:', error);
-            document.getElementById('container-produk').innerHTML = '<h2>Maaf, data produk gagal dimuat.</h2><p>Pastikan file katalog_produk.json sudah benar.</p>';
+            document.getElementById('container-produk').innerHTML = '<h2>Maaf, data produk gagal dimuat.</h2><p>Pastikan file katalog_produk.json sudah benar dan memiliki properti "kategori".</p>';
         });
 }
+
+/**
+ * Mendapatkan daftar kategori unik dari produk.
+ */
+function dapatkanKategoriUnik() {
+    const kategori = daftarProduk.map(produk => produk.kategori).filter(k => k); 
+    return ['Semua', ...new Set(kategori)];
+}
+
+/**
+ * Membuat dan menampilkan tombol filter kategori.
+ */
+function renderFilterKategori() {
+    const kategoriUnik = dapatkanKategoriUnik();
+    if (!filterContainer) return;
+
+    filterContainer.innerHTML = '';
+    
+    kategoriUnik.forEach(kategori => {
+        const button = document.createElement('button');
+        button.textContent = kategori;
+        button.classList.add('tombol-filter');
+        
+        // Menandai kategori aktif
+        if (kategori === kategoriAktif) {
+            button.classList.add('aktif');
+        }
+        
+        button.onclick = () => filterUtama(kategori); // Menggunakan filterUtama
+        filterContainer.appendChild(button);
+    });
+}
+
+/**
+ * Menginisialisasi listener pada kotak pencarian.
+ */
+function inisialisasiPencarian() {
+    const searchInput = document.getElementById('search-input');
+    // Setiap kali pengguna mengetik (input), kita panggil filterUtama
+    if (searchInput) {
+        searchInput.addEventListener('input', filterUtama);
+    }
+}
+
+
+/**
+ * Fungsi utama yang menggabungkan Filter Kategori dan Pencarian Teks.
+ * @param {string | undefined} kategoriDipilih - Kategori yang akan difilter (opsional).
+ */
+function filterUtama(kategoriDipilih) {
+    
+    // 1. Tentukan kategori aktif (jika dipanggil dari tombol filter)
+    if (typeof kategoriDipilih === 'string') {
+        kategoriAktif = kategoriDipilih; 
+    }
+    
+    // 2. Ambil nilai dari kotak pencarian
+    const searchInput = document.getElementById('search-input');
+    // Jika searchInput tidak ada (misal di-load di tempat lain), atur query ke kosong
+    const queryPencarian = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+    let produkDifilter = daftarProduk;
+
+    // A. Filter berdasarkan Kategori
+    if (kategoriAktif !== 'Semua') {
+        produkDifilter = produkDifilter.filter(produk => produk.kategori === kategoriAktif);
+    }
+
+    // B. Filter berdasarkan Teks Pencarian
+    if (queryPencarian.length > 0) {
+        produkDifilter = produkDifilter.filter(produk => {
+            // Cari di Nama ID, Nama Khmer, Deskripsi, dan Kategori
+            const namaId = produk.nama_produk_id.toLowerCase();
+            const namaKh = produk.nama_produk_kh.toLowerCase();
+            const deskripsi = produk.deskripsi_singkat_id.toLowerCase();
+            const kategori = produk.kategori.toLowerCase();
+            
+            return namaId.includes(queryPencarian) ||
+                   namaKh.includes(queryPencarian) ||
+                   deskripsi.includes(queryPencarian) ||
+                   kategori.includes(queryPencarian);
+        });
+    }
+    
+    // Render ulang tombol filter dan tampilan produk
+    renderFilterKategori(); 
+    tampilkanProduk(produkDifilter); 
+}
+
+// Fungsi Lama filterProduk, kini hanya memanggil filterUtama
+function filterProduk(kategoriDipilih) {
+    filterUtama(kategoriDipilih);
+}
+
 
 // Fungsi untuk membuat elemen HTML (UI) untuk setiap produk
 function tampilkanProduk(produkArray) {
     const container = document.getElementById('container-produk');
     container.innerHTML = ''; // Kosongkan container
+
+    // Tampilkan pesan jika tidak ada produk setelah filter
+    if (produkArray.length === 0) {
+         container.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; color: #C87C5C; font-size: 1.2em; padding: 40px;">
+            Maaf, tidak ada produk ditemukan dalam pencarian atau kategori ini.</p>`;
+        return;
+    }
 
     produkArray.forEach(produk => {
         const kartu = document.createElement('div');
@@ -33,7 +147,7 @@ function tampilkanProduk(produkArray) {
 
         const namaProdukEn = produk.nama_produk_en || produk.nama_produk_id; 
         
-        // Tombol aksi di kartu produk (HANYA TAMBAH KE KERANJANG)
+        // Tombol aksi di kartu produk
         const tombolAksi = produk.stok_tersedia ? 
             `<button class="tombol-sosial whatsapp tombol-keranjang" onclick="tambahKeKeranjang('${produk.kode_sku}')">
                 <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
@@ -43,7 +157,7 @@ function tampilkanProduk(produkArray) {
             </a>`;
 
 
-        // Isi kartu dengan HTML (fokus pada 3 bahasa)
+        // Isi kartu dengan HTML
         kartu.innerHTML = `
             <img src="${produk.link_foto_utama}" alt="Foto Produk ${produk.nama_produk_id}">
             <div class="detail-produk"> 
@@ -57,7 +171,7 @@ function tampilkanProduk(produkArray) {
                 <p class="deskripsi">${produk.deskripsi_singkat_id}</p>
                 
                 <ul class="poin-jual-leap">
-                    ${produk.poin_kunci_untuk_leap.map(poin => `<li>✅ ${poin}</li>`).join('')}
+                    ${produk.poin_kunci_untuk_leap.map(poin => `<li><i class="fas fa-check-circle"></i> ${poin}</li>`).join('')}
                 </ul>
                 
                 <div class="multi-currency-price">
@@ -79,7 +193,7 @@ function tampilkanProduk(produkArray) {
 }
 
 // ==========================================================
-// LOGIKA KERANJANG BELANJA
+// LOGIKA KERANJANG BELANJA (TIDAK BERUBAH)
 // ==========================================================
 
 function tambahKeKeranjang(sku) {
@@ -134,7 +248,7 @@ function updateKeranjangUI() {
     daftarItemDiv.innerHTML = '';
     
     if (totalItem === 0) {
-        daftarItemDiv.innerHTML = '<p>Keranjang kosong. Ayo belanja!</p>';
+        daftarItemDiv.innerHTML = '<p style="text-align: center; color: #6a6a6a; margin: 30px;">Keranjang kosong. Ayo belanja!</p>';
     } else {
         // Tampilkan item
         for (const sku in keranjang) {
@@ -220,7 +334,7 @@ function checkout(platform) {
 
     switch (platform) {
         case 'whatsapp':
-            window.open(`https://wa.me/${85589640025}?text=${pesanEncoded}`, '_blank');
+            window.open(`https://wa.me/${waNumber}?text=${pesanEncoded}`, '_blank');
             break;
         case 'telegram':
             window.open(`https://t.me/${teleUsername}?text=${pesanEncoded}`, '_blank');
