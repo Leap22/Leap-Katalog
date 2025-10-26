@@ -2,12 +2,11 @@
  * ==========================================================
  * SCRIPT JAVASCRIPT LENGKAP - FINAL VERSION
  * ==========================================================
- * Perubahan Utama:
- * 1. Menghilangkan deskripsi produk dan merapatkan semua margin/padding vertikal.
- * 2. Mengubah tampilan harga menjadi dua kotak bersebelahan (Mata Uang Pilihan & THB Ref) 
- * dengan ukuran font yang seragam.
- * 3. MODIFIKASI JUDUL DAN SKU: Judul dibuat lebih besar/tebal dengan background, 
- * dan SKU dibuat tebal/kontras di atas blok harga.
+ * Penyesuaian Terakhir:
+ * 1. Tata letak ringkas dengan margin vertikal minimal.
+ * 2. Tampilan Harga Dual Box (Mata Uang Pilihan & THB) yang seragam dan rapi.
+ * 3. Judul Produk (Nama) dibuat lebih BESAR, TEBAL (900), dengan background ringan.
+ * 4. Kode Produk (SKU) dibuat TEBAL dengan warna kontras, diletakkan di atas blok harga.
  */
 
 // 1. VARIABEL GLOBAL DAN BAHASA AKTIF
@@ -20,7 +19,7 @@ let activeLang = 'en';
 
 // 🚨 KONFIGURASI API KEY DAN KURS
 const BASE_CURRENCY = 'THB';
-// Ganti ini dengan API Key Anda yang valid
+// Ganti ini dengan API Key Anda yang valid jika ingin kurs real-time
 const API_KEY = 'c67fe61514ad55a1649ae408'; 
 const API_URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${BASE_CURRENCY}`;
 
@@ -173,6 +172,7 @@ const changeLanguage = (lang) => {
     document.getElementById('search-input').placeholder = getTranslation('search_placeholder');
     
     renderFilters();
+    // Memastikan filter dijalankan setelah bahasa diubah
     filterUtama(document.querySelector('.tombol-filter.aktif')?.getAttribute('data-category-original') || 'Semua');
     renderKeranjang();
 };
@@ -223,8 +223,10 @@ const createProductCard = (product) => {
     
     const formatPrice = (price, code) => {
         if (code === 'IDR' || code === 'KHR') {
+            // Untuk IDR/KHR, bulatkan dan gunakan format lokal (tanpa desimal)
             return Math.round(price).toLocaleString('id-ID'); 
         }
+        // Untuk mata uang lain, gunakan 2 desimal
         return (price).toFixed(2);
     };
 
@@ -233,7 +235,7 @@ const createProductCard = (product) => {
     
     const points = product.selling_points[activeLang] || product.selling_points['en'] || [];
     
-    // Selling Points CSS
+    // Selling Points
     const sellingPointsHtml = points.length > 0 ? `
         <div class="selling-points-container" style="border-left: 5px solid ${cardColor}; background-color: ${cardColor}1A; padding: 5px 10px; margin: 5px 0 5px 0;"> 
             <ul style="list-style: none; margin: 0; padding: 0;">
@@ -242,9 +244,9 @@ const createProductCard = (product) => {
         </div>
     ` : '';
     
-    // Harga Bersebelahan CSS
+    // Harga Bersebelahan
     const primaryColorBox = cardColor; 
-    const secondaryColorBox = '#006400'; 
+    const secondaryColorBox = '#006400'; // Hijau Tua untuk THB
     const priceFontSize = '0.95em'; 
 
     const multiCurrencyPriceHtml = `
@@ -258,7 +260,7 @@ const createProductCard = (product) => {
         </div>
     `;
 
-    
+    // Kartu Produk Lengkap
     return `
         <div class="${cardClass}" data-id="${product.id}" style="border: 1px solid ${cardColor}; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);">
             <img src="${product.image}" alt="${namaText}" onerror="this.onerror=null;this.src='https://via.placeholder.com/200?text=Image+Error';">
@@ -298,8 +300,7 @@ const createProductCard = (product) => {
     `;
 };
 
-// 7. FUNGSI KERANJANG BELANJA, FILTER, SEARCH, DLL (Fungsionalitas pendukung)
-
+// 7. FUNGSI KERANJANG BELANJA, FILTER, SEARCH, DLL
 const renderProducts = (produkList) => {
     const container = document.getElementById('container-produk');
     container.innerHTML = produkList.map(createProductCard).join('');
