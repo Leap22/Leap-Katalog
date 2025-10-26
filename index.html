@@ -12,7 +12,7 @@
     <header>
         <h1>Selamat Datang di Toko Leap, dekat Crown Casino</h1>
         <h2>សូមស្វាគមន៍! (Soum svaakom!)</h2>
-        <p>Pilih produk favorit Anda di bawah ini. Pesan mudah melalui WhatsApp, Telegram, atau Facebook!</p>
+        <p>Pilih produk favorit Anda di bawah ini. Minimal Pembelian: ฿500 (THB).</p>
     </header>
 
     <main id="container-produk">
@@ -22,6 +22,41 @@
         <p>© 2025 Leap Store. Dibuat dengan semangat Tropical Modern.</p>
     </footer>
     
+    <button id="tombol-keranjang" class="tombol-floating" onclick="tampilkanKeranjang()">
+        <i class="fas fa-shopping-cart"></i> 
+        <span id="badge-keranjang">0</span>
+    </button>
+    
+    <div id="modal-keranjang" class="modal">
+        <div class="modal-konten">
+            <span class="tutup-modal" onclick="tutupKeranjang()">&times;</span>
+            <h2><i class="fas fa-shopping-basket"></i> Keranjang Belanja Anda</h2>
+            
+            <div id="daftar-item-keranjang">
+                </div>
+            
+            <hr>
+            
+            <div class="summary-keranjang">
+                <p>Total Harga (THB): <span id="total-keranjang-thb" class="harga-total">฿ 0.00</span></p>
+                <div id="pesan-validasi"></div>
+            </div>
+            
+            <div class="tombol-pesan-container">
+                <p class="pesan-kontak">Kirim pesanan Anda melalui:</p>
+                <button id="checkout-wa" class="tombol-checkout whatsapp" onclick="checkout('whatsapp')">
+                    <i class="fab fa-whatsapp"></i> Pesan via WhatsApp
+                </button>
+                <button id="checkout-tele" class="tombol-checkout telegram" onclick="checkout('telegram')">
+                    <i class="fab fa-telegram-plane"></i> Pesan via Telegram
+                </button>
+                <button id="checkout-fb" class="tombol-checkout facebook" onclick="checkout('facebook')">
+                    <i class="fab fa-facebook-f"></i> Pesan via Messenger
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
