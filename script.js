@@ -1,8 +1,13 @@
 /**
  * ==========================================================
- * SCRIPT JAVASCRIPT LENGKAP UNTUK LEAP STORE 
- * (KERANJANG, MULTIBAHASA, SELLING POINTS & BAHASA NON-MODAL)
+ * SCRIPT JAVASCRIPT LENGKAP - FINAL VERSION
  * ==========================================================
+ * Perubahan Utama:
+ * 1. Menghilangkan deskripsi produk dan merapatkan semua margin/padding vertikal.
+ * 2. Mengubah tampilan harga menjadi dua kotak bersebelahan (Mata Uang Pilihan & THB Ref) 
+ * dengan ukuran font yang seragam.
+ * 3. MODIFIKASI JUDUL DAN SKU: Judul dibuat lebih besar/tebal dengan background, 
+ * dan SKU dibuat tebal/kontras di atas blok harga.
  */
 
 // 1. VARIABEL GLOBAL DAN BAHASA AKTIF
@@ -13,321 +18,178 @@ const KONTAK_TELEGRAM = 'leapstorepoipet';
 const LANGUAGE_STORAGE_KEY = 'leap_store_language';
 let activeLang = 'en'; 
 
-// 2. DATA PRODUK (DENGAN 6 BAHASA: ID, EN, KH, ZH, TH, VI, dan Selling Points)
-const PRODUCTS = [
-    {
-        id: 1,
-        sku: 'LP-K001',
-        image: 'kopi-hitam.jpg', 
-        kategori: ['Minuman Racikan & Segar', 'Kopi & Teh'],
-        nama: {
-            id: "Kopi Hitam Poipet Istimewa",
-            en: "Special Poipet Black Coffee",
-            kh: "កាហ្វេខ្មៅប៉ោយប៉ែតពិសេស",
-            zh: "波贝特色黑咖啡", 
-            th: "กาแฟดำปอยเปตสูตรพิเศษ",
-            vi: "Cà phê đen Poipet đặc biệt" // NEW VIETNAM
-        },
-        deskripsi: {
-            id: "Kopi hitam kental diracik khusus untuk Anda. Pembangkit semangat!",
-            en: "Thick black coffee specially brewed for you. The perfect spirit booster!",
-            kh: "កាហ្វេខ្មៅខាប់ដែលបានឆុងជាពិសេសសម្រាប់អ្នក។ ជួយបង្កើនស្មារតី!",
-            zh: "浓黑咖啡专为您调配。 完美提神!",
-            th: "กาแฟดำเข้มข้นชงพิเศษสำหรับคุณ ดื่มแล้วมีชีวิตชีวา!",
-            vi: "Cà phê đen đậm đặc được pha chế đặc biệt dành cho bạn. Tăng cường tinh thần tuyệt vời!" // NEW VIETNAM
-        },
-        selling_points: {
-            id: [
-                "100% Biji Kopi Arabika Pilihan",
-                "Diracik saat dipesan (Freshly Made)",
-                "Pilihan Es atau Hangat"
-            ],
-            en: [
-                "100% Selected Arabica Beans",
-                "Brewed only upon order (Freshly Made)",
-                "Available Iced or Hot"
-            ],
-            kh: [
-                "គ្រាប់កាហ្វេ Arabica 100% ជ្រើសរើស",
-                "ឆុងភ្លាមៗនៅពេលកុម្ម៉ង់ (ធ្វើថ្មីៗ)",
-                "អាចជ្រើសរើស ទឹកកក ឬ ក្តៅ"
-            ],
-            zh: [
-                "100% 优质阿拉比卡咖啡豆",
-                "现点现做（新鲜制作）",
-                "可选冰镇或热饮"
-            ],
-            th: [
-                "เมล็ดกาแฟอาราบิก้าคัดพิเศษ 100%",
-                "ชงใหม่ตามสั่ง (ทำสดใหม่)",
-                "เลือกได้ทั้งแบบเย็นหรือร้อน"
-            ],
-            vi: [
-                "100% hạt Arabica chọn lọc",
-                "Pha chế ngay khi gọi món (Tươi mới)",
-                "Có sẵn đá hoặc nóng"
-            ] // NEW VIETNAM
-        },
-        harga: { thb: 70.00, usd: 2.00, khr: 8000 },
-        stok: 'ada', 
-        preorder_contact: 'WA' 
-    },
-    {
-        id: 2,
-        sku: 'LP-M002',
-        image: 'masker-wajah.jpg',
-        kategori: ['Perawatan Diri', 'Kesehatan'],
-        nama: {
-            id: "Masker Wajah Kolagen Gold",
-            en: "Gold Collagen Facial Mask",
-            kh: "ម៉ាស់បិទមុខខូឡាជែនមាស",
-            zh: "黄金胶原蛋白面膜",
-            th: "มาส์กหน้าคอลลาเจนทองคำ",
-            vi: "Mặt nạ vàng Collagen" // NEW VIETNAM
-        },
-        deskripsi: {
-            id: "Masker mewah untuk menghidrasi dan mencerahkan kulit wajah. Cocok untuk semua jenis kulit.",
-            en: "Luxury mask to hydrate and brighten facial skin. Suitable for all skin types.",
-            kh: "ម៉ាស់ប្រណិតដើម្បីផ្តល់សំណើមនិងធ្វើអោយស្បែកមុខភ្លឺថ្លា។ សាកសមសម្រាប់គ្រប់ប្រភេទស្បែក។",
-            zh: "奢华面膜，滋润提亮肌肤。 适合所有肤质。",
-            th: "มาส์กหรูหราให้ความชุ่มชื้นและปรับผิวหน้าให้กระจ่างใส เหมาะสำหรับทุกสภาพผิว",
-            vi: "Mặt nạ sang trọng giúp dưỡng ẩm và làm sáng da mặt. Phù hợp cho mọi loại da." // NEW VIETNAM
-        },
-        selling_points: {
-            id: [
-                "Mengandung Serbuk Emas Asli",
-                "Sangat Ampuh untuk Mencerahkan",
-                "Perawatan Wajah Ekspres 15 Menit"
-            ],
-            en: [
-                "Contains Real Gold Powder",
-                "Highly Effective for Brightening",
-                "15-Minute Express Facial Treatment"
-            ],
-            kh: [
-                "មានផ្ទុកម្សៅមាសពិតប្រាកដ",
-                "មានប្រសិទ្ធភាពខ្ពស់ក្នុងការបំភ្លឺ",
-                "ព្យាបាលមុខរហ័ស ១៥ នាទី"
-            ],
-            zh: [
-                "含有真金粉末",
-                "提亮效果显著",
-                "15分钟速效面部护理"
-            ],
-            th: [
-                "มีส่วนผสมของผงทองคำแท้",
-                "มีประสิทธิภาพสูงในการปรับผิวกระจ่างใส",
-                "บำรุงผิวหน้ารวดเร็ว 15 นาที"
-            ],
-            vi: [
-                "Chứa bột vàng thật",
-                "Rất hiệu quả để làm sáng da",
-                "Chăm sóc da mặt cấp tốc 15 phút"
-            ] // NEW VIETNAM
-        },
-        harga: { thb: 120.00, usd: 3.50, khr: 14000 },
-        stok: 'ada',
-        preorder_contact: null 
-    },
-    {
-        id: 3,
-        sku: 'LP-S003',
-        image: 'jus-buah.jpg',
-        kategori: ['Minuman Racikan & Segar', 'Jus Buah'],
-        nama: {
-            id: "Jus Mangga Alpukat Segar",
-            en: "Fresh Mango Avocado Juice",
-            kh: "ទឹកក្រឡុកស្វាយផ្លែប័រស្រស់",
-            zh: "新鲜芒果牛油果汁",
-            th: "น้ำมะม่วงอะโวคาโดสด",
-            vi: "Nước ép Xoài Bơ tươi" // NEW VIETNAM
-        },
-        deskripsi: {
-            id: "Kombinasi mangga dan alpukat yang sehat dan mengenyangkan. Dingin lebih nikmat!",
-            en: "A healthy and filling combination of mango and avocado. Best served cold!",
-            kh: "ការរួមបញ្ចូលគ្នារវាងស្វាយនិងផ្លែប័រដែលមានសុខភាពល្អនិងឆ្អែត។ ញ៉ាំពេលត្រជាក់កាន់តែឆ្ងាញ់!",
-            zh: "芒果和牛油果健康又饱腹。 冷藏饮用味道更佳!",
-            th: "การผสมผสานที่ลงตัวของมะม่วงและอะโวคาโด ดีต่อสุขภาพและอิ่มนาน ดื่มเย็นชื่นใจ!",
-            vi: "Sự kết hợp lành mạnh và no bụng giữa xoài và bơ. Uống lạnh sẽ ngon hơn!" // NEW VIETNAM
-        },
-        selling_points: {
-            id: [
-                "Mengandung Vitamin A dan E Tinggi",
-                "Tanpa Gula Tambahan (Request)",
-                "Penyegar Paling Laris!"
-            ],
-            en: [
-                "High in Vitamins A and E",
-                "No Added Sugar (On Request)",
-                "Our Bestselling Refresher!"
-            ],
-             kh: [
-                "មានវីតាមីន A និង E ខ្ពស់",
-                "មិនមានបន្ថែមស្ករ (តាមការស្នើសុំ)",
-                "ភេសជ្ជៈស្រស់ស្រាយដែលលក់ដាច់បំផុត!"
-            ],
-             zh: [
-                "富含维生素A和E",
-                "不添加糖（可要求）",
-                "最畅销的清爽饮品!"
-            ],
-            th: [
-                "อุดมด้วยวิตามิน A และ E",
-                "ไม่เพิ่มน้ำตาล (ตามคำขอ)",
-                "เครื่องดื่มคลายร้อนที่ขายดีที่สุด!"
-            ],
-            vi: [
-                "Giàu Vitamin A và E",
-                "Không thêm đường (Theo yêu cầu)",
-                "Thức uống giải khát bán chạy nhất!"
-            ] // NEW VIETNAM
-        },
-        harga: { thb: 150.00, usd: 4.30, khr: 17500 },
-        stok: 'habis', 
-        preorder_contact: 'TELEGRAM' 
-    },
-     {
-        id: 4,
-        sku: 'LP-S004',
-        image: 'snack-krispi.jpg',
-        kategori: ['Snack & Makanan Ringan'],
-        nama: {
-            id: "Biskuit Keju Krispi Import",
-            en: "Imported Crispy Cheese Biscuits",
-            kh: "នំប៊ីស្គីតឈីសស្រួយនាំចូល",
-            zh: "进口香脆芝士饼干",
-            th: "บิสกิตชีสกรอบนำเข้า",
-            vi: "Bánh quy phô mai giòn nhập khẩu" // NEW VIETNAM
-        },
-        deskripsi: {
-            id: "Snack renyah keju premium dari Taiwan. Sekali coba pasti ketagihan.",
-            en: "Premium crispy cheese snack from Taiwan. Once you try it, you'll be hooked.",
-            kh: "អាហារសម្រន់ឈីសស្រួយគុណភាពខ្ពស់ពីតៃវ៉ាន់។ សាកម្តងជាប់ចិត្តរហូត។",
-            zh: "来自台湾的优质香脆芝士零食。 一试难忘。",
-            th: "ขนมขบเคี้ยวชีสกรอบระดับพรีเมียมจากไต้หวัน ลองแล้วจะติดใจแน่นอน",
-            vi: "Snack phô mai giòn cao cấp từ Đài Loan. Ăn một lần là nghiện ngay." // NEW VIETNAM
-        },
-        selling_points: {
-            id: [
-                "Keju Asli Premium",
-                "Rasa Gurih dan Tidak Eneg",
-                "Ideal untuk Teman Nonton"
-            ],
-            en: [
-                "Premium Real Cheese",
-                "Savory Flavor, Not Overwhelming",
-                "Ideal for Movie Snacks"
-            ],
-            kh: [
-                "ឈីសពិតប្រាកដគុណភាពខ្ពស់",
-                "រសជាតិឈ្ងុយឆ្ងាញ់ មិនលើសលប់",
-                "ល្អបំផុតសម្រាប់ញ៉ាំមើលកុន"
-            ],
-            zh: [
-                "优质真芝士",
-                "咸香可口，不腻",
-                "理想的看电影零食"
-            ],
-            th: [
-                "ชีสแท้ระดับพรีเมียม",
-                "รสเค็มมัน ไม่เลี่ยน",
-                "เหมาะสำหรับเป็นขนมขบเคี้ยวเวลาดูหนัง"
-            ],
-            vi: [
-                "Phô mai thật cao cấp",
-                "Vị mặn ngon, không ngấy",
-                "Lý tưởng để ăn vặt khi xem phim"
-            ] // NEW VIETNAM
-        },
-        harga: { thb: 85.00, usd: 2.45, khr: 10500 },
-        stok: 'preorder', 
-        preorder_contact: 'WA' 
-    }
-];
+// 🚨 KONFIGURASI API KEY DAN KURS
+const BASE_CURRENCY = 'THB';
+// Ganti ini dengan API Key Anda yang valid
+const API_KEY = 'c67fe61514ad55a1649ae408'; 
+const API_URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${BASE_CURRENCY}`;
 
-// 3. KAMUS TERJEMAHAN UNTUK ELEMEN NON-PRODUK (STATIS)
-const DICTIONARY = {
-    'add_to_cart': { id: "Tambah Keranjang", en: "Add to Cart", kh: "បន្ថែមរទេះ", zh: "加入购物", th: "เพิ่มตะกร้า", vi: "Thêm vào giỏ" }, // NEW VIETNAM
-    'out_of_stock': { id: "Stok Habis", en: "Out of Stock", kh: "អស់ស្តុក", zh: "缺货", th: "สินค้าหมด", vi: "Hết hàng" }, // NEW VIETNAM
-    'pre_order': { id: "Pre-Order via", en: "Pre-Order via", kh: "កុម្ម៉ង់ទុកមុនតាមរយៈ", zh: "通过预购", th: "สั่งจองผ่าน", vi: "Đặt trước qua" }, // NEW VIETNAM
-    
-    'cart_title': { id: "Keranjang Belanja Anda", en: "Your Cart", kh: "រទេះរុញរបស់អ្នក", zh: "您的购物车", th: "ตะกร้าสินค้าของคุณ", vi: "Giỏ hàng của bạn" }, // NEW VIETNAM
-    'cart_empty': { id: "Keranjang kosong.", en: "Cart is empty.", kh: "រទេះរុញទទេ។", zh: "购物车是空的。", th: "ตะกร้าว่างเปล่า", vi: "Giỏ hàng trống." }, // NEW VIETNAM
-    'subtotal': { id: "Subtotal", en: "Subtotal", kh: "សរុបបណ្តោះអាសន្ន", zh: "小计", th: "ราคารวม", vi: "Tổng phụ" }, // NEW VIETNAM
-    'ready_checkout': { id: "Siap Checkout!", en: "Ready to Checkout!", kh: "ត្រៀមទូទាត់!", zh: "准备结账!", th: "พร้อมชำระเงิน!", vi: "Sẵn sàng thanh toán!" }, // NEW VIETNAM
-    'min_purchase': { id: "Pembelian minimum:", en: "Minimum purchase:", kh: "ការទិញអប្បបរមា:", zh: "最低购买金额:", th: "ยอดซื้อขั้นต่ำ:", vi: "Mua hàng tối thiểu:" }, // NEW VIETNAM
-    'your_total': { id: "Total Anda:", en: "Your Total:", kh: "ផលបូករបស់អ្នក:", zh: "您的总額:", th: "ราคารวมของคุณ:", vi: "Tổng cộng của bạn:" }, // NEW VIETNAM
-    'checkout_contact': { id: "Lanjutkan ke pemesanan via kontak:", en: "Continue to order via contact:", kh: "បន្តការកុម្ម៉ង់តាមរយៈទំនាក់ទំនង:", zh: "继续通过联系人订购:", th: "ดำเนินการสั่งซื้อผ่านการติดต่อ:", vi: "Tiếp tục đặt hàng qua liên hệ:" }, // NEW VIETNAM
-    'checkout_button': { id: "Checkout via", en: "Checkout via", kh: "ទូទាត់តាមរយៈ", zh: "通过结账", th: "ชำระเงินผ่าน", vi: "Thanh toán qua" }, // NEW VIETNAM
-    'search_placeholder': { id: "Cari nama produk (Kopi, Masker, Biskuit, dll.)", en: "Search product name (Coffee, Mask, Biscuit, etc.)", kh: "ស្វែងរកឈ្មោះផលិតផល (កាហ្វេ, ម៉ាស់, នំប៊ីស្គីត, ល។)", zh: "搜索产品名称 (咖啡, 面膜, 饼干等)", th: "ค้นหาชื่อผลิตภัณฑ์ (กาแฟ, มาส์ก, บิสกิต, ฯลฯ)", vi: "Tìm kiếm tên sản phẩm (Cà phê, Mặt nạ, Bánh quy, v.v.)" }, // NEW VIETNAM
-    'all_filter': { id: "Semua", en: "All", kh: "ទាំងអស់", zh: "全部", th: "ทั้งหมด", vi: "Tất cả" }, // NEW VIETNAM
-    'promo_title': { id: "Promo Minuman Sehat! (Healthy Drink Promo!)", en: "Healthy Drink Promo! (10% OFF)", kh: "ប្រូម៉ូសិនភេសជ្ជៈសុខភាព! (បញ្ចុះតម្លៃ 10%)", zh: "健康饮品促销！(九折)", th: "โปรโมชั่นเครื่องดื่มเพื่อสุขภาพ! (ลด 10%)", vi: "Khuyến mãi đồ uống tốt cho sức khỏe! (Giảm 10%)" }, // NEW VIETNAM
-    'promo_desc': { id: "Dapatkan potongan 10% untuk semua Jus Buah Racikan hari ini. Klik untuk pesan!", en: "Get 10% OFF all Blended Fruit Juices today. Click to order!", kh: "ទទួលបានការបញ្ចុះតម្លៃ 10% លើទឹកផ្លែឈើច្របាច់ទាំងអស់នៅថ្ងៃនេះ។ ចុចដើម្បីកក់!", zh: "今日所有混合果汁九折优惠。 点击订购！", th: "รับส่วนลด 10% สำหรับน้ำผลไม้ปั่นทั้งหมดวันนี้ คลิกเพื่อสั่งซื้อ!", vi: "Giảm 10% cho tất cả nước ép Trái Cây Hỗn Hợp hôm nay. Nhấp vào để đặt hàng!" }, // NEW VIETNAM
-    'promo_button': { id: "Lihat Promo Segar", en: "See Fresh Promo", kh: "See Fresh Promo", zh: "查看新鲜促销", th: "ดูโปรโมชั่นสด", vi: "Xem Khuyến Mãi Mới" }, // NEW VIETNAM
+// Kurs Fallback (Jika API gagal)
+let exchangeRates = {
+    'THB': 1, 
+    'USD': 0.0275, 
+    'KHR': 114.0,  
+    'IDR': 430.0,  
+    'CNY': 0.198,  
+    'VI': 650.0,   
+}; 
+
+// Peta Mata Uang berdasarkan Bahasa
+const CURRENCY_MAP = {
+    'id': { code: 'IDR', symbol: 'Rp', format: 'Normal' },
+    'zh': { code: 'CNY', symbol: '¥', format: 'Normal' },
+    'th': { code: 'THB', symbol: '฿', format: 'Normal' },
+    'kh': { code: 'KHR', symbol: 'KHR', format: 'Normal' },
+    'en': { code: 'USD', symbol: '$', format: 'Normal' },
+    'vi': { code: 'USD', symbol: '$', format: 'Normal' }, 
 };
 
+const getCurrencyDetails = (lang) => {
+    return CURRENCY_MAP[lang] || CURRENCY_MAP['en'];
+};
 
-// 4. FUNGSI PENGGANTIAN BAHASA UTAMA & NON-MODAL
+// URL GAMBAR SEMENTARA BARU
+const TEMP_IMAGE_URL = 'https://infocapt77.com/wp-content/uploads/2025/10/CAPTAIN-1x1-2.jpg';
+
+// 2. DATA PRODUK
+const PRODUCTS = [
+    {
+        id: 1, sku: 'LP-K001', image: TEMP_IMAGE_URL, kategori: ['Minuman Racikan & Segar', 'Kopi & Teh'], color_code: '#8BC34A', 
+        nama: { id: "Kopi Hitam Istimewa", en: "Special Black Coffee", kh: "កាហ្វេខ្មៅពិសេស" }, 
+        deskripsi: { id: "Kopi hitam kental", en: "Thick black coffee", kh: "កាហ្វេខ្មៅខាប់" },
+        selling_points: { id: ["100% Arabika", "Diracik Fresh", "Es/Hangat"], en: ["100% Arabica", "Freshly Made", "Iced or Hot"], kh: ["100% Arabica", "ធ្វើថ្មី", "ក្តៅ/ត្រជាក់"] },
+        harga_thb: 70.00, 
+        stok: 'ada', preorder_contact: 'WA' 
+    },
+    {
+        id: 2, sku: 'LP-M002', image: TEMP_IMAGE_URL, kategori: ['Perawatan Diri', 'Kesehatan'], color_code: '#FFC107', 
+        nama: { id: "Masker Kolagen Gold", en: "Gold Collagen Mask", kh: "ម៉ាស់បិទមុខមាស" },
+        deskripsi: { id: "Masker untuk mencerahkan kulit.", en: "Luxury mask to brighten skin.", kh: "ម៉ាស់ប្រណិត" },
+        selling_points: { id: ["Mengandung Emas Asli", "Mencerahkan Efektif", "15 Menit Ekspres"], en: ["Contains Real Gold", "Highly Effective Brightening", "15-Minute Express Treatment"], kh: ["មានមាសពិត", "ភ្លឺថ្លាខ្លាំង", "15 នាទីលឿន"] },
+        harga_thb: 120.00,
+        stok: 'ada', preorder_contact: null 
+    },
+    {
+        id: 3, sku: 'LP-S003', image: TEMP_IMAGE_URL, kategori: ['Minuman Racikan & Segar', 'Jus Buah'], color_code: '#8BC34A', 
+        nama: { id: "Jus Mangga Alpukat", en: "Mango Avocado Juice", kh: "ទឹកក្រឡុកស្វាយផ្លែប័រ" },
+        deskripsi: { id: "Kombinasi sehat dan mengenyangkan.", en: "Healthy and filling combo.", kh: "ការរួមបញ្ចូលគ្នាដែលមានសុខភាពល្អ" },
+        selling_points: { id: ["Vitamin A dan E Tinggi", "Tanpa Gula Tambahan (Request)", "Penyegar Paling Laris"], en: ["High in Vitamins A & E", "No Added Sugar (On Request)", "Bestselling Refresher!"], kh: ["វីតាមីន A & E ខ្ពស់", "គ្មានជាតិស្ករ", "ពេញនិយមបំផុត"] },
+        harga_thb: 150.00,
+        stok: 'habis', preorder_contact: 'TELEGRAM' 
+    },
+    {
+        id: 4, sku: 'LP-S004', image: TEMP_IMAGE_URL, kategori: ['Snack & Makanan Ringan'], color_code: '#D4E157', 
+        nama: { id: "Biskuit Keju Krispi", en: "Crispy Cheese Biscuits", kh: "នំប៊ីស្គីតឈីសស្រួយ" },
+        deskripsi: { id: "Snack renyah keju premium.", en: "Premium crispy cheese snack.", kh: "អាហារសម្រន់ឈីស" },
+        selling_points: { id: ["Keju Asli Premium"], en: ["Premium Real Cheese"], kh: ["ឈីសពិតប្រាកដ"] },
+        harga_thb: 85.00,
+        stok: 'preorder', preorder_contact: 'WA' 
+    },
+    { id: 5, sku: 'LP-T005', image: TEMP_IMAGE_URL, kategori: ['Minuman Racikan & Segar', 'Kopi & Teh'], color_code: '#8BC34A', nama: { id: "Teh Melati Dingin", en: "Cold Jasmine Tea" }, deskripsi: { id: "Penyegar alami", en: "Natural refresher" }, selling_points: { id: ["Tanpa pemanis"], en: ["No sweeteners"] }, harga_thb: 55.00, stok: 'ada' },
+    { id: 6, sku: 'LP-S006', image: TEMP_IMAGE_URL, kategori: ['Snack & Makanan Ringan'], color_code: '#D4E157', nama: { id: "Keripik Kentang Truffle", en: "Truffle Potato Chips" }, deskripsi: { id: "Keripik rasa truffle mewah.", en: "Luxury truffle flavor." }, selling_points: { id: ["Truffle oil asli"], en: ["Real truffle oil"] }, harga_thb: 180.00, stok: 'ada' },
+    { id: 7, sku: 'LP-M007', image: TEMP_IMAGE_URL, kategori: ['Perawatan Diri', 'Kesehatan'], color_code: '#FFC107', nama: { id: "Hand Sanitizer Lemon", en: "Lemon Hand Sanitizer" }, deskripsi: { id: "Melindungi tangan dari bakteri.", en: "Protects from bacteria." }, selling_points: { id: ["Alkohol 70%"], en: ["70% Alcohol"] }, harga_thb: 95.00, stok: 'ada' },
+    { id: 8, sku: 'LP-D008', image: TEMP_IMAGE_URL, kategori: ['Kesehatan'], color_code: '#FFC107', nama: { id: "Kapsul Vitamin C", en: "Vitamin C Capsules" }, deskripsi: { id: "Suplemen daya tahan tubuh.", en: "Immunity supplement." }, selling_points: { id: ["1000mg per kapsul"], en: ["1000mg per capsule"] }, harga_thb: 450.00, stok: 'ada' },
+    { id: 9, sku: 'LP-J009', image: TEMP_IMAGE_URL, kategori: ['Snack & Makanan Ringan'], color_code: '#D4E157', nama: { id: "Almond Panggang Madu", en: "Honey Roasted Almonds" }, deskripsi: { id: "Camilan sehat tinggi protein.", en: "Healthy high-protein snack." }, selling_points: { id: ["Kaya serat"], en: ["Rich in fiber"] }, harga_thb: 110.00, stok: 'ada' },
+    { id: 10, sku: 'LP-B010', image: TEMP_IMAGE_URL, kategori: ['Minuman Racikan & Segar'], color_code: '#8BC34A', nama: { id: "Minuman Berenergi", en: "Energy Drink" }, deskripsi: { id: "Meningkatkan fokus dan performa.", en: "Boosts focus and performance." }, selling_points: { id: ["Taurine & Ginseng"], en: ["Taurine & Ginseng"] }, harga_thb: 60.00, stok: 'ada' },
+    { id: 11, sku: 'LP-S011', image: TEMP_IMAGE_URL, kategori: ['Perawatan Diri'], color_code: '#FFC107', nama: { id: "Sikat Gigi Charcoal", en: "Charcoal Toothbrush" }, deskripsi: { id: "Pembersihan mendalam.", en: "Deep cleaning." }, selling_points: { id: ["100% serat alami"], en: ["100% natural fiber"] }, harga_thb: 80.00, stok: 'ada' },
+    { id: 12, sku: 'LP-S012', image: TEMP_IMAGE_URL, kategori: ['Snack & Makanan Ringan', 'Kesehatan'], color_code: '#D4E157', nama: { id: "Permen Pelega Tenggorokan", en: "Throat Relief Candy" }, deskripsi: { id: "Cepat meredakan sakit tenggorokan.", en: "Quick relief for sore throat." }, selling_points: { id: ["Ekaliptus kuat"], en: ["Strong Eucalyptus"] }, harga_thb: 45.00, stok: 'ada' },
+    { id: 13, sku: 'LP-M013', image: TEMP_IMAGE_URL, kategori: ['Minuman Racikan & Segar', 'Kesehatan'], color_code: '#8BC34A', nama: { id: "Teh Detox Herbal", en: "Herbal Detox Tea" }, deskripsi: { id: "Membersihkan pencernaan saat tidur.", en: "Cleanses digestive system." }, selling_points: { id: ["10 Herbal Alami"], en: ["10 Natural Herbs"] }, harga_thb: 220.00, stok: 'preorder', preorder_contact: 'TELEGRAM' },
+    { id: 14, sku: 'LP-L014', image: TEMP_IMAGE_URL, kategori: ['Perawatan Diri'], color_code: '#FFC107', nama: { id: "Lip Balm Shea Butter", en: "Shea Butter Lip Balm" }, deskripsi: { id: "Menghidrasi bibir kering.", en: "Hydrates dry lips." }, selling_points: { id: ["SPF 15"], en: ["SPF 15"] }, harga_thb: 105.00, stok: 'ada' },
+    { id: 15, sku: 'LP-C015', image: TEMP_IMAGE_URL, kategori: ['Snack & Makanan Ringan'], color_code: '#D4E157', nama: { id: "Cokelat Hitam 80%", en: "80% Dark Chocolate" }, deskripsi: { id: "Kaya antioksidan.", en: "Rich in antioxidants." }, selling_points: { id: ["Cocok untuk diet"], en: ["Suitable for diet"] }, harga_thb: 135.00, stok: 'ada' },
+    { id: 16, sku: 'LP-K016', image: TEMP_IMAGE_URL, kategori: ['Minuman Racikan & Segar', 'Kopi & Teh'], color_code: '#8BC34A', nama: { id: "Kopi Luwak Arabika", en: "Arabica Luwak Coffee" }, deskripsi: { id: "Rasa unik dan mewah.", en: "Unique and luxurious taste." }, selling_points: { id: ["Rasa sangat halus"], en: ["Very smooth taste"] }, harga_thb: 800.00, stok: 'preorder', preorder_contact: 'WA' },
+    { id: 17, sku: 'LP-S017', image: TEMP_IMAGE_URL, kategori: ['Perawatan Diri'], color_code: '#FFC107', nama: { id: "Shampo Anti Rambut Rontok", en: "Anti-Hair Loss Shampoo" }, deskripsi: { id: "Menguatkan akar rambut.", en: "Strengthens hair roots." }, selling_points: { id: ["Biotin dan Keratin"], en: ["Biotin and Keratin"] }, harga_thb: 380.00, stok: 'ada' },
+    { id: 18, sku: 'LP-S018', image: TEMP_IMAGE_URL, kategori: ['Minuman Racikan & Segar', 'Kesehatan'], color_code: '#8BC34A', nama: { id: "Susu Kedelai Organik", en: "Organic Soy Milk" }, deskripsi: { id: "Protein nabati, rendah lemak.", en: "Plant protein, low fat." }, selling_points: { id: ["Gluten-Free"], en: ["Gluten-Free"] }, harga_thb: 75.00, stok: 'ada' },
+    { id: 19, sku: 'LP-S019', image: TEMP_IMAGE_URL, kategori: ['Snack & Makanan Ringan'], color_code: '#D4E157', nama: { id: "Nori Rumput Laut Pedas", en: "Spicy Roasted Seaweed" }, deskripsi: { id: "Snack renyah pedas manis.", en: "Crispy sweet and spicy snack." }, selling_points: { id: ["Rendah kalori"], en: ["Low calorie"] }, harga_thb: 50.00, stok: 'ada' },
+    { id: 20, sku: 'LP-P020', image: TEMP_IMAGE_URL, kategori: ['Perawatan Diri'], color_code: '#FFC107', nama: { id: "Pasta Gigi Pemutih Herbal", en: "Herbal Whitening Toothpaste" }, deskripsi: { id: "Gigi putih dan napas segar.", en: "White teeth and fresh breath." }, selling_points: { id: ["Bebas Fluoride"], en: ["Fluoride-Free"] }, harga_thb: 160.00, stok: 'ada' },
+    { id: 21, sku: 'LP-J021', image: TEMP_IMAGE_URL, kategori: ['Perawatan Diri'], color_code: '#FFC107', nama: { id: "Gel Lidah Buaya Murni", en: "Pure Aloe Vera Gel" }, deskripsi: { id: "Melembabkan kulit.", en: "Moisturizes skin." }, selling_points: { id: ["99% Lidah Buaya"], en: ["99% Aloe Vera"] }, harga_thb: 190.00, stok: 'ada' },
+    { id: 22, sku: 'LP-K022', image: TEMP_IMAGE_URL, kategori: ['Minuman Racikan & Segar', 'Kopi & Teh'], color_code: '#8BC34A', nama: { id: "Kopi Instan 3-in-1", en: "Classic 3-in-1 Coffee" }, deskripsi: { id: "Kopi instan cepat saji.", en: "Quick instant coffee." }, selling_points: { id: ["Mudah disajikan"], en: ["Easy to prepare"] }, harga_thb: 50.00, stok: 'ada' },
+    { id: 23, sku: 'LP-S023', image: TEMP_IMAGE_URL, kategori: ['Snack & Makanan Ringan'], color_code: '#D4E157', nama: { id: "Roti Gandum Utuh Cokelat", en: "Chocolate Whole Wheat Bread" }, deskripsi: { id: "Cocok untuk sarapan.", en: "Perfect for breakfast." }, selling_points: { id: ["Tinggi serat"], en: ["High fiber"] }, harga_thb: 150.00, stok: 'ada' },
+    { id: 24, sku: 'LP-M024', image: TEMP_IMAGE_URL, kategori: ['Kesehatan'], color_code: '#FFC107', nama: { id: "Minyak Esensial Lavender", en: "Lavender Essential Oil" }, deskripsi: { id: "Membantu relaksasi.", en: "Helps relaxation." }, selling_points: { id: ["Aroma terapi alami"], en: ["Natural aromatherapy"] }, harga_thb: 280.00, stok: 'ada' },
+    { id: 25, sku: 'LP-K025', image: TEMP_IMAGE_URL, kategori: ['Perawatan Diri'], color_code: '#FFC107', nama: { id: "Krim Tangan Aloe & Vitamin E", en: "Aloe & Vitamin E Hand Cream" }, deskripsi: { id: "Melembutkan dan melindungi tangan.", en: "Softens and protects hands." }, selling_points: { id: ["Tidak lengket"], en: ["Non-greasy formula"] }, harga_thb: 90.00, stok: 'ada' },
+    { id: 26, sku: 'LP-B026', image: TEMP_IMAGE_URL, kategori: ['Minuman Racikan & Segar'], color_code: '#8BC34A', nama: { id: "Air Mineral Premium (1L)", en: "Premium Mineral Water (1L)" }, deskripsi: { id: "pH seimbang.", en: "Balanced pH." }, selling_points: { id: ["pH 7.5"], en: ["pH 7.5"] }, harga_thb: 30.00, stok: 'ada' }
+];
+
+
+// 3. KAMUS TERJEMAHAN
+const DICTIONARY = {
+    'add_to_cart': { id: "Tambah Keranjang", en: "Add to Cart", kh: "បន្ថែមរទេះ", zh: "加入购物", th: "เพิ่มตะกร้า", vi: "Thêm vào giỏ" }, 
+    'out_of_stock': { id: "Stok Habis", en: "Out of Stock", kh: "អស់ស្តុក", zh: "缺货", th: "สินค้าหมด", vi: "Hết hàng" }, 
+    'pre_order': { id: "Pre-Order via", en: "Pre-Order via", kh: "កុម្ម៉ង់ទុកមុនតាមរយៈ", zh: "通过预购", th: "สั่งจองผ่าน", vi: "Đặt trước qua" }, 
+    'cart_title': { id: "Keranjang Belanja", en: "Your Cart", kh: "រទេះរុញ", zh: "购物车", th: "ตะกร้าสินค้า", vi: "Giỏ hàng" }, 
+    'cart_empty': { id: "Keranjang kosong.", en: "Cart is empty.", kh: "រទេះទទេ។", zh: "购物车空的。", th: "ตะกร้าว่าง", vi: "Giỏ trống." }, 
+    'subtotal': { id: "Subtotal", en: "Subtotal", kh: "សរុបបណ្តោះអាសន្ន", zh: "小计", th: "ราคารวม", vi: "Tổng phụ" }, 
+    'ready_checkout': { id: "Siap Checkout!", en: "Ready to Checkout!", kh: "ត្រៀមទូទាត់!", zh: "准备结账!", th: "พร้อมชำระเงิน!", vi: "Sẵn sàng!" }, 
+    'min_purchase': { id: "Pembelian minimum:", en: "Minimum purchase:", kh: "ការទិញអប្បបរមា:", zh: "最低购买金额:", th: "ยอดซื้อขั้นต่ำ:", vi: "Mua tối thiểu:" }, 
+    'your_total': { id: "Total Anda:", en: "Your Total:", kh: "ផលបូក:", zh: "您的总額:", th: "ราคารวม:", vi: "Tổng cộng:" }, 
+    'checkout_contact': { id: "Lanjutkan via kontak:", en: "Continue via contact:", kh: "បន្តតាមទំនាក់ទំនង:", zh: "继续通过联系人:", th: "ดำเนินการผ่าน:", vi: "Tiếp tục qua:" }, 
+    'checkout_button': { id: "Checkout via", en: "Checkout via", kh: "ទូទាត់តាមរយៈ", zh: "通过结账", th: "ชำระเงินผ่าน", vi: "Thanh toán qua" }, 
+    'search_placeholder': { id: "Cari produk...", en: "Search product...", kh: "ស្វែងរកផលិតផល...", zh: "搜索产品...", th: "ค้นหาสินค้า...", vi: "Tìm kiếm..." }, 
+    'all_filter': { id: "Semua", en: "All", kh: "ទាំងអស់", zh: "全部", th: "ทั้งหมด", vi: "Tất cả" }, 
+};
 
 const getTranslation = (key) => DICTIONARY[key] ? DICTIONARY[key][activeLang] || DICTIONARY[key]['en'] : `[${key}]`;
 
-/**
- * FUNGSI UTAMA PENGGANTIAN BAHASA
- */
+
+// 4. FUNGSI PENGAMBILAN KURS (API)
+async function fetchExchangeRates() {
+    console.log(`Mencoba mengambil kurs real-time menggunakan ${BASE_CURRENCY} sebagai Base...`);
+    
+    try {
+        const response = await fetch(API_URL);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        
+        if (data && data.conversion_rates) {
+            const rates = data.conversion_rates;
+            
+            exchangeRates['THB'] = 1; 
+            
+            // Perbarui kurs mata uang lokal
+            if (rates['USD']) exchangeRates['USD'] = rates['USD'];
+            if (rates['KHR']) exchangeRates['KHR'] = rates['KHR'];
+            if (rates['IDR']) exchangeRates['IDR'] = rates['IDR'];
+            if (rates['CNY']) exchangeRates['CNY'] = rates['CNY'];
+
+            console.log("Kurs berhasil diperbarui dari API:", exchangeRates);
+        } else {
+            console.error("Data kurs tidak valid dari API. Menggunakan kurs fallback.");
+        }
+    } catch (error) {
+        console.error("Gagal mengambil kurs API. Menggunakan kurs fallback.", error);
+    }
+}
+
+// 5. FUNGSI UTAMA PENGGANTIAN BAHASA
 const changeLanguage = (lang) => {
     activeLang = lang;
-    
     localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
     
-    // 1. Perbarui teks statis di Header (H2 dan P)
     document.querySelectorAll('h2[id^="header-subtitle-"], p[id^="header-text-"]').forEach(el => el.style.display = 'none');
     
     document.getElementById(`header-subtitle-${lang}`) && (document.getElementById(`header-subtitle-${lang}`).style.display = 'block');
     document.getElementById(`header-text-${lang}`) && (document.getElementById(`header-text-${lang}`).style.display = 'block');
-
-    // 2. Perbarui Placeholder & Teks Filter
     document.getElementById('search-input').placeholder = getTranslation('search_placeholder');
     
-    // 3. Perbarui Banner Promo
-    document.getElementById('promo-title-id').textContent = DICTIONARY['promo_title'][lang] || DICTIONARY['promo_title']['en'];
-    document.getElementById('promo-desc-id').textContent = DICTIONARY['promo_desc'][lang] || DICTIONARY['promo_desc']['en'];
-    document.getElementById('promo-button').textContent = DICTIONARY['promo_button'][lang] || DICTIONARY['promo_button']['en'];
-
-    // 4. Render ulang semua elemen dinamis (Produk, Filter, Keranjang)
-    const activeFilterEl = document.querySelector('.tombol-filter.aktif');
-    // Jika ada filter aktif, gunakan teksnya. Jika tidak ada, gunakan 'Semua' (default).
-    const activeCategoryText = activeFilterEl ? activeFilterEl.textContent : getTranslation('all_filter');
-    
     renderFilters();
-    // Gunakan kategori ASLI untuk filtering, bukan teks terjemahan
-    filterUtama(Object.keys(DICTIONARY.all_filter).find(key => DICTIONARY.all_filter[key] === activeCategoryText) ? 'Semua' : activeCategoryText);
-
+    filterUtama(document.querySelector('.tombol-filter.aktif')?.getAttribute('data-category-original') || 'Semua');
     renderKeranjang();
 };
 
-/**
- * FUNGSI KHUSUS: Memilih bahasa dan mengaktifkan tombol yang sesuai (FIX BARU NON-MODAL)
- */
 const selectAndCloseModal = (lang) => {
     changeLanguage(lang);
-    
-    // Tampilkan konten utama (jika sebelumnya disembunyikan)
-    document.getElementById('main-content-wrapper').style.opacity = '1';
-
-    // Kelola class 'active' pada tombol bahasa
     document.querySelectorAll('#language-selector-fixed .tombol-bahasa').forEach(btn => {
         btn.classList.remove('active');
-        // Mendapatkan kode bahasa dari atribut onclick
         const match = btn.getAttribute('onclick').match(/'([^']+)'/);
         const btnLang = match ? match[1] : null;
-        
         if (btnLang === lang) {
             btn.classList.add('active');
         }
     });
 };
 
-// 5. FUNGSI UTAMA UNTUK MERENDER PRODUK & FILTER
+// 6. FUNGSI MERENDER PRODUK (LOGIKA KURS DINAMIS)
 const getProductById = (id) => PRODUCTS.find(p => p.id === id);
 
 // Fungsi untuk membuat HTML card produk
@@ -349,36 +211,85 @@ const createProductCard = (product) => {
         tombolAction = `preOrder('${product.preorder_contact}', ${product.id})`;
     }
 
-    const namaText = product.nama[activeLang] || product.nama['en'];
-    const deskripsiText = product.deskripsi[activeLang] || product.deskripsi['en'];
+    const cardColor = product.color_code || '#CCCCCC';
+    
+    const currencyDetails = getCurrencyDetails(activeLang);
+    const currencyCode = currencyDetails.code; 
+    const currencySymbol = currencyDetails.symbol; 
+    const rate = exchangeRates[currencyCode] || exchangeRates['USD']; 
+    const basePriceTHB = product.harga_thb;
+    const primaryPrice = basePriceTHB * rate; 
+    const secondaryPriceTHB = basePriceTHB; 
+    
+    const formatPrice = (price, code) => {
+        if (code === 'IDR' || code === 'KHR') {
+            return Math.round(price).toLocaleString('id-ID'); 
+        }
+        return (price).toFixed(2);
+    };
+
+    const namaText = product.nama[activeLang] || product.nama['en'] || `Product ${product.id}`;
     const cardClass = isStokHabis ? 'kartu-produk stok-habis' : 'kartu-produk';
     
-    // GENERATE SELLING POINTS
     const points = product.selling_points[activeLang] || product.selling_points['en'] || [];
+    
+    // Selling Points CSS
     const sellingPointsHtml = points.length > 0 ? `
-        <div class="selling-points-container">
-            <ul>
-                ${points.map(point => `<li><i class="fas fa-check-circle"></i> ${point}</li>`).join('')}
+        <div class="selling-points-container" style="border-left: 5px solid ${cardColor}; background-color: ${cardColor}1A; padding: 5px 10px; margin: 5px 0 5px 0;"> 
+            <ul style="list-style: none; margin: 0; padding: 0;">
+                ${points.map(point => `<li style="margin-bottom: 2px; line-height: 1.2; font-size: 0.85em;"><i class="fas fa-check-circle" style="color: ${cardColor}; margin-right: 5px;"></i> ${point}</li>`).join('')}
             </ul>
         </div>
     ` : '';
     
-    return `
-        <div class="${cardClass}" data-id="${product.id}">
-            <img src="${product.image}" alt="${namaText}">
-            <div class="detail-produk">
-                <h2 class="nama-utama">${namaText}</h2>
-                <p class="deskripsi">${deskripsiText}</p>
-                
-                ${sellingPointsHtml} <div class="multi-currency-price">
-                    <p class="harga utama">฿ ${product.harga.thb.toFixed(2)} (THB)</p>
-                    <p class="harga kecil">$ ${product.harga.usd.toFixed(2)} / KHR ${product.harga.khr.toLocaleString('en-US')}</p>
-                </div>
-                
-                <p class="kode-sku-info">SKU: ${product.sku}</p>
+    // Harga Bersebelahan CSS
+    const primaryColorBox = cardColor; 
+    const secondaryColorBox = '#006400'; 
+    const priceFontSize = '0.95em'; 
 
-                <div class="tombol-sosial-container">
-                    <button class="tombol-keranjang ${tombolClass}" data-text-mobile="${tombolText.split(' ')[0]}" onclick="${tombolAction}">
+    const multiCurrencyPriceHtml = `
+        <div class="multi-currency-price-compact" style="display: flex; justify-content: space-between; gap: 5px; margin-top: 5px; margin-bottom: 5px;">
+            <div style="flex: 1; text-align: center; background-color: ${primaryColorBox}; color: white; padding: 8px 5px; border-radius: 5px; font-weight: bold; font-size: ${priceFontSize}; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                ${currencySymbol} ${formatPrice(primaryPrice, currencyCode)} (${currencyCode})
+            </div>
+            <div style="flex: 1; text-align: center; background-color: ${secondaryColorBox}; color: white; padding: 8px 5px; border-radius: 5px; font-weight: bold; font-size: ${priceFontSize}; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                ฿ ${secondaryPriceTHB.toFixed(2)} (THB)
+            </div>
+        </div>
+    `;
+
+    
+    return `
+        <div class="${cardClass}" data-id="${product.id}" style="border: 1px solid ${cardColor}; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);">
+            <img src="${product.image}" alt="${namaText}" onerror="this.onerror=null;this.src='https://via.placeholder.com/200?text=Image+Error';">
+            <div class="detail-produk" style="padding: 10px; padding-top: 5px;"> 
+                
+                <h2 class="nama-utama" style="
+                    color: black; 
+                    margin-top: 5px; 
+                    margin-bottom: 5px; 
+                    font-size: 1.2em; 
+                    line-height: 1.3;
+                    font-weight: 900; 
+                    background-color: #f9f9f9;
+                    padding: 5px;
+                    border-radius: 3px;
+                ">${namaText}</h2>
+                
+                <p class="kode-sku-info" style="
+                    margin-top: 5px; 
+                    margin-bottom: 3px; 
+                    font-size: 0.85em; 
+                    font-weight: bold;
+                    color: #004d40; /* Teal gelap untuk kontras */
+                ">SKU: ${product.sku}</p>
+                
+                ${multiCurrencyPriceHtml}
+                
+                ${sellingPointsHtml} 
+
+                <div class="tombol-sosial-container" style="margin-top: 5px;">
+                    <button class="tombol-keranjang ${tombolClass}" data-text-mobile="${tombolText.split(' ')[0]}" onclick="${tombolAction}" ${isStokHabis ? 'disabled' : ''}>
                         <i class="fas fa-shopping-cart"></i> ${tombolText}
                     </button>
                 </div>
@@ -387,13 +298,12 @@ const createProductCard = (product) => {
     `;
 };
 
-// Fungsi untuk merender produk ke halaman
+// 7. FUNGSI KERANJANG BELANJA, FILTER, SEARCH, DLL (Fungsionalitas pendukung)
+
 const renderProducts = (produkList) => {
     const container = document.getElementById('container-produk');
     container.innerHTML = produkList.map(createProductCard).join('');
 };
-
-// Fungsi untuk mengambil semua kategori unik (tidak diterjemahkan)
 const getUniqueCategories = () => {
     const categories = new Set();
     PRODUCTS.forEach(product => {
@@ -401,88 +311,55 @@ const getUniqueCategories = () => {
     });
     return ['Semua', ...Array.from(categories)];
 };
-
-// Fungsi untuk merender tombol filter
 const renderFilters = () => {
     const container = document.getElementById('filter-container');
     const categories = getUniqueCategories();
-    
     container.innerHTML = ''; 
-
     categories.forEach(cat => {
         const button = document.createElement('button');
         button.className = 'tombol-filter';
         const buttonText = cat === 'Semua' ? getTranslation('all_filter') : cat;
         button.textContent = buttonText;
-        
-        // Simpan kategori ASLI (tidak diterjemahkan) di data attribute
         button.setAttribute('data-category-original', cat);
-
         button.onclick = () => filterUtama(cat); 
         container.appendChild(button);
     });
-
-    // Aktifkan filter 'Semua' (yang sudah diterjemahkan) saat dimuat
     const allFilterButton = Array.from(container.children).find(btn => btn.getAttribute('data-category-original') === 'Semua');
     if (allFilterButton) {
         allFilterButton.classList.add('aktif');
     }
 };
-
-// Fungsi filter utama
 const filterUtama = (kategoriOriginal) => {
-    const allFilterText = getTranslation('all_filter');
-    
-    // Kelola kelas 'aktif' berdasarkan kategori ASLI
     document.querySelectorAll('.tombol-filter').forEach(btn => {
         btn.classList.remove('aktif');
         const original = btn.getAttribute('data-category-original');
-        
         if (original === kategoriOriginal) {
              btn.classList.add('aktif');
         }
     });
-
-    // Lakukan filter berdasarkan kategori ASLI
     let filteredProducts;
     if (kategoriOriginal === 'Semua') {
         filteredProducts = PRODUCTS;
     } else {
         filteredProducts = PRODUCTS.filter(p => p.kategori.includes(kategoriOriginal));
     }
-
     renderProducts(filteredProducts);
 };
-
-// Fungsi pencarian
 const handleSearch = () => {
     const query = document.getElementById('search-input').value.toLowerCase();
-    
     const filteredProducts = PRODUCTS.filter(product => {
-        // Ambil semua nama produk dari semua bahasa
-        const allNames = Object.values(product.nama).join(' ').toLowerCase(); 
-        const allDescriptions = Object.values(product.deskripsi).join(' ').toLowerCase(); 
-        const allSellingPoints = Object.values(product.selling_points).flat().join(' ').toLowerCase();
-        
-        const textToSearch = `${allNames} ${allDescriptions} ${allSellingPoints} ${product.sku} ${product.kategori.join(' ')}`.toLowerCase();
-        return textToSearch.includes(query);
+        const productNames = Object.values(product.nama).join(' ').toLowerCase();
+        const productCategories = product.kategori.join(' ').toLowerCase();
+        return productNames.includes(query) || productCategories.includes(query) || product.sku.toLowerCase().includes(query);
     });
-
-    // Hapus semua filter aktif saat melakukan pencarian
     document.querySelectorAll('.tombol-filter').forEach(btn => btn.classList.remove('aktif'));
-    
     renderProducts(filteredProducts);
 };
-
 document.getElementById('search-input').addEventListener('keyup', handleSearch);
-
-
-// 6. FUNGSI KERANJANG BELANJA
 const updateBadge = () => {
     const totalItems = Object.values(keranjang).reduce((sum, qty) => sum + qty, 0);
     document.getElementById('badge-keranjang').textContent = totalItems;
 };
-
 const tambahKeKeranjang = (id) => {
     if (keranjang[id]) {
         keranjang[id]++;
@@ -492,7 +369,6 @@ const tambahKeKeranjang = (id) => {
     updateBadge();
     renderKeranjang(); 
 };
-
 const ubahKuantitas = (id, delta) => {
     if (keranjang[id]) {
         keranjang[id] += delta;
@@ -504,7 +380,6 @@ const ubahKuantitas = (id, delta) => {
     renderKeranjang();
 };
 
-// Fungsi untuk merender isi keranjang
 const renderKeranjang = () => {
     const container = document.getElementById('daftar-item-keranjang');
     const totalElementTHB = document.getElementById('total-keranjang-thb');
@@ -522,7 +397,7 @@ const renderKeranjang = () => {
         for (const id in keranjang) {
             const product = getProductById(parseInt(id));
             const quantity = keranjang[id];
-            const subtotalTHB = product.harga.thb * quantity;
+            const subtotalTHB = product.harga_thb * quantity; 
             totalTHB += subtotalTHB;
 
             const displayLang = product.nama[activeLang] || product.nama['en'];
@@ -530,10 +405,10 @@ const renderKeranjang = () => {
             const secondaryLang = product.nama[secondaryLangKey] || product.nama['en']; 
 
             html += `
-                <div class="item-keranjang">
+                <div class="item-keranjang" style="padding: 5px 0; border-bottom: 1px dashed #eee;">
                     <div class="info-item">
                         <span class="nama-item">${displayLang} (x${quantity})</span>
-                        <span class="nama-tambahan-keranjang">${secondaryLang}</span>
+                        <span class="nama-tambahan-keranjang" style="font-size: 0.7em; opacity: 0.7;">${secondaryLang}</span>
                         <span class="harga-item">${getTranslation('subtotal')}: ฿ ${(subtotalTHB).toFixed(2)}</span>
                     </div>
                     <div class="kontrol-item">
@@ -555,7 +430,6 @@ const renderKeranjang = () => {
         btn.innerHTML = `<i class="fab fa-${platform.toLowerCase()}"></i> ${getTranslation('checkout_button')} ${platform}`;
     });
 
-    // Validasi Minimum Pembelian
     if (totalTHB < MIN_ORDER_THB && Object.keys(keranjang).length > 0) {
         const kurangTHB = (MIN_ORDER_THB - totalTHB).toFixed(2);
         pesanValidasiElement.innerHTML = `
@@ -576,11 +450,10 @@ const tutupKeranjang = () => {
     document.getElementById('modal-keranjang').style.display = 'none';
 };
 
-// 7. FUNGSI CHECKOUT & PREORDER
 const checkout = (platform) => {
     const totalTHB = Object.keys(keranjang).reduce((sum, id) => {
         const product = getProductById(parseInt(id));
-        return sum + (product.harga.thb * keranjang[id]);
+        return sum + (product.harga_thb * keranjang[id]);
     }, 0);
 
     if (totalTHB < MIN_ORDER_THB) {
@@ -591,17 +464,27 @@ const checkout = (platform) => {
 
     let finalMessage = "Halo Leap Store! Saya ingin memesan:\n\n---\n";
     
-    // LIST BAHASA BARU: Tambahkan 'vi'
-    const languages = ['id', 'en', 'kh', 'zh', 'th', 'vi']; 
+    const languages = Object.keys(CURRENCY_MAP); 
     languages.forEach(lang => {
         let pesanLang = `[${lang.toUpperCase()}]\n`;
+        const langCurrency = getCurrencyDetails(lang);
+        const code = langCurrency.code;
+        const rate = exchangeRates[code] || exchangeRates['USD']; 
+        const totalDynamic = (totalTHB * rate);
+
+        let totalDisplay = totalDynamic.toFixed(2);
+        if (code === 'IDR' || code === 'KHR') {
+             totalDisplay = Math.round(totalDynamic).toLocaleString('id-ID'); 
+        }
+        
         for (const id in keranjang) {
             const product = getProductById(parseInt(id));
             const quantity = keranjang[id];
-            const nama = product.nama[lang] || product.nama['en']; 
+            const nama = product.nama[lang] || product.nama['en'] || `Product ${product.id}`; 
             pesanLang += `- ${nama} (x${quantity})\n`;
         }
-        pesanLang += `${DICTIONARY['your_total'][lang] || DICTIONARY['your_total']['en']}: ฿ ${totalTHB.toFixed(2)} (THB)\n\n`;
+        pesanLang += `${DICTIONARY['your_total'][lang] || DICTIONARY['your_total']['en']}: ${langCurrency.symbol} ${totalDisplay} (${code})\n`;
+        pesanLang += `(Base THB: ฿ ${totalTHB.toFixed(2)})\n\n`;
         finalMessage += pesanLang;
     });
     finalMessage += "Terima kasih! (Mohon informasikan metode pembayaran dan pengiriman Anda)";
@@ -621,8 +504,7 @@ const preOrder = (platform, id) => {
     const product = getProductById(id);
     if (!product) return;
 
-    let bahasaPesan = DICTIONARY['pre_order'][activeLang] || DICTIONARY['pre_order']['en'];
-    let namaProduk = product.nama[activeLang] || product.nama['en'];
+    let namaProduk = product.nama[activeLang] || product.nama['en'] || `Product ${product.id}`;
 
     let pesan = `Halo Leap Store, saya tertarik dengan Pre-Order produk ${namaProduk} (SKU: ${product.sku}). Mohon informasinya.`;
     const encodedMessage = encodeURIComponent(pesan);
@@ -640,23 +522,23 @@ const preOrder = (platform, id) => {
 // 8. INISIALISASI
 document.addEventListener('DOMContentLoaded', () => {
     
-    // Ambil bahasa yang tersimpan
-    const savedLang = localStorage.getItem(LANGUAGE_STORAGE_KEY);
+    // Panggil API Kurs
+    fetchExchangeRates().then(() => {
+        const savedLang = localStorage.getItem(LANGUAGE_STORAGE_KEY);
+        
+        if (savedLang) {
+            activeLang = savedLang;
+            selectAndCloseModal(activeLang); 
+        } else {
+            activeLang = 'en'; 
+            selectAndCloseModal(activeLang);
+        }
+        
+        updateBadge(); 
+    });
     
-    if (savedLang) {
-        // Jika bahasa sudah ada, gunakan dan aktifkan tombol
-        activeLang = savedLang;
-        selectAndCloseModal(activeLang); 
-    } else {
-        // Jika belum ada, set default ke 'en' dan aktifkan
-        activeLang = 'en'; 
-        selectAndCloseModal(activeLang);
-    }
-    
-    updateBadge(); 
 });
 
-// Tutup modal keranjang jika user klik di luar modal
 window.onclick = (event) => {
     const modalKeranjang = document.getElementById('modal-keranjang');
     if (event.target === modalKeranjang) {
