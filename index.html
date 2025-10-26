@@ -1,87 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leap Store - Poipet (Dynamic Rates)</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <title>Leap Store - Katalog Produk</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <h1>Selamat Datang di Toko Leap</h1>
-        <h2 id="header-subtitle-id" style="display: none;">dekat Crown Casino</h2>
-        <h2 id="header-subtitle-en" style="display: none;">near Crown Casino</h2>
-        <h2 id="header-subtitle-kh" style="display: none;">នៅជិត Crown Casino</h2>
-        <h2 id="header-subtitle-zh" style="display: none;">皇冠赌场附近</h2>
-        <h2 id="header-subtitle-th" style="display: none;">ใกล้ Crown Casino</h2>
-        <h2 id="header-subtitle-vi" style="display: none;">gần Sòng bạc Crown</h2> 
-        <p class="header-sub-text" id="header-text-id" style="display: none;">Pilih produk favorit Anda di bawah ini. Minimal Pembelian: ฿500 (THB).</p>
-        <p class="header-sub-text" id="header-text-en" style="display: none;">Select your favorite products below. Minimum Purchase: ฿500 (THB).</p>
-        <p class="header-sub-text" id="header-text-kh" style="display: none;">ជ្រើសរើសផលិតផលដែលអ្នកចូលចិត្តនៅខាងក្រោម។ ការទិញអប្បបរមា: ฿500 (THB)។</p>
-        <p class="header-sub-text" id="header-text-zh" style="display: none;">请在下方选择您喜欢的产品。 最低购买金额：฿500 (THB)。</p>
-        <p class="header-sub-text" id="header-text-th" style="display: none;">เลือกสินค้าที่คุณชื่นชอบด้านล่าง ยอดซื้อขั้นต่ำ: ฿500 (THB)</p>
-        <p class="header-sub-text" id="header-text-vi" style="display: none;">Chọn sản phẩm yêu thích của bạn dưới đây. Mua hàng tối thiểu: ฿500 (THB).</p>
+        <div class="header-konten">
+            <div class="logo-container">
+                <h1 id="header-title-id">Selamat Datang di Toko Leap</h1>
+                <h2 id="header-subtitle-id">dekat Crown Casino</h2>
+                <p id="header-text-id">Pilih produk favorit Anda di bawah ini. Minimal Pembelian: ฿500 (THB).</p>
+
+                <h1 id="header-title-en" style="display:none;">Welcome to Leap Store</h1>
+                <h2 id="header-subtitle-en" style="display:none;">near Crown Casino</h2>
+                <p id="header-text-en" style="display:none;">Select your favorite products below. Minimum Purchase: ฿500 (THB).</p>
+                
+                </div>
+
+            <div class="kontrol-nav">
+                <button class="tombol-keranjang-nav" onclick="bukaModalKeranjang()">
+                    <i class="fas fa-shopping-cart"></i> Keranjang
+                    <span id="badge-keranjang">0</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="header-konten">
+            <div id="language-selector-fixed">
+                </div>
+        </div>
     </header>
 
-    <div id="language-selector-fixed">
-        <button class="tombol-bahasa" onclick="selectAndCloseModal('id')"><span class="flag-icon">🇮🇩</span> ID</button>
-        <button class="tombol-bahasa" onclick="selectAndCloseModal('en')"><span class="flag-icon">🇺🇸</span> EN</button>
-        <button class="tombol-bahasa" onclick="selectAndCloseModal('kh')"><span class="flag-icon">🇰🇭</span> KH</button>
-        <button class="tombol-bahasa" onclick="selectAndCloseModal('zh')"><span class="flag-icon">🇨🇳</span> ZH</button>
-        <button class="tombol-bahasa" onclick="selectAndCloseModal('th')"><span class="flag-icon">🇹🇭</span> TH</button>
-        <button class="tombol-bahasa" onclick="selectAndCloseModal('vi')"><span class="flag-icon">🇻🇳</span> VI</button>
-    </div>
-
-    <div id="main-content-wrapper">
+    <div class="konten-utama">
         
-        <div id="search-container">
-            <input type="text" id="search-input" placeholder="Cari nama produk (Kopi, Masker, Biskuit, dll.)">
+        <div class="search-filter-container">
+            <input type="text" id="search-input" placeholder="Cari produk..">
+
+            <div id="filter-container">
+                </div>
         </div>
 
-        <div id="filter-container">
-            </div>
+        <div id="promo-banner" style="display: none; background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 20px; text-align: center; border-radius: 8px; margin-bottom: 20px;">
+            <h3 id="promo-title-id">Promo Minuman Sehat (10% OFF)</h3>
+            <p id="promo-desc-id">Dapatkan diskon 10% untuk semua Minuman Racikan hari ini. Klik untuk memesan!</p>
+            <button id="promo-button" style="background-color: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 10px; cursor: pointer;">Lihat Promo</button>
+
+            <h3 id="promo-title-en" style="display:none;">Healthy Drink Promo (10% OFF)</h3>
+            <p id="promo-desc-en" style="display:none;">Get 10% off all Blended Fruit Juices today. Click to order!</p>
+        </div>
+
 
         <div id="container-produk">
             </div>
-
-    </div> 
-
-    <div class="tombol-floating" onclick="tampilkanKeranjang()">
-        <i class="fas fa-shopping-cart"></i>
-        <span id="badge-keranjang">0</span>
     </div>
 
     <div id="modal-keranjang" class="modal">
         <div class="modal-konten">
-            <span class="tutup" onclick="tutupKeranjang()">&times;</span>
-            <h3>Keranjang Belanja Anda</h3>
-            
+            <span class="tutup" onclick="tutupModalKeranjang()">&times;</span>
+            <h2>Keranjang Belanja Anda</h2>
+
             <div id="daftar-item-keranjang">
                 </div>
-            
-            <div class="harga-total">
-                <span id="total-text">Total: </span>
-                <span id="total-keranjang-thb">฿ 0.00</span>
-            </div>
 
-            <div id="pesan-validasi">
+            <p class="ringkasan-total">Total: <span id="total-keranjang">฿0.00</span></p>
+
+            <div id="pesan-validasi" class="pesan-validasi">
                 </div>
 
-            <p class="pesan-kontak">Lanjutkan ke pemesanan via kontak:</p>
-            <div class="tombol-pesan-container">
-                <button class="tombol-checkout whatsapp" onclick="checkout('whatsapp')">
+            <div class="checkout-container">
+                <p class="pesan-kontak">Lanjutkan ke pemesanan via kontak:</p>
+                <button class="tombol-checkout whatsapp" id="checkout-whatsapp" onclick="checkout('whatsapp')">
                     <i class="fab fa-whatsapp"></i> Checkout via WhatsApp
                 </button>
-                <button class="tombol-checkout telegram" onclick="checkout('telegram')">
+                <button class="tombol-checkout telegram" id="checkout-telegram" onclick="checkout('telegram')">
                     <i class="fab fa-telegram-plane"></i> Checkout via Telegram
                 </button>
             </div>
         </div>
     </div>
-    
+
     <script src="script.js"></script>
 </body>
 </html>
