@@ -1,0 +1,200 @@
+[
+  {
+    "kode_sku": "COF-KIN-001",
+    "nama_produk_id": "Kopi Arabika Premium Kintamani",
+    "nama_produk_kh": "កាហ្វេអារ៉ាប៊ីកាឃីនតាម៉ានីពិសេស (Kafe Arabika Kintamani Piseth)",
+    "deskripsi_singkat_id": "Biji kopi sangrai kualitas tinggi dengan aroma citrus dan nutty. Cocok untuk manual brew.",
+    "kategori": "Minuman",
+    "harga": {
+      "idr": 95000,
+      "usd": 6.33,
+      "thb": 230.00,
+      "khr": 25000
+    },
+    "satuan_berat": "250g",
+    "stok_tersedia": true,
+    "varian": [
+      { "nama": "Giling Kasar", "harga_tambahan": 0 },
+      { "nama": "Giling Halus", "harga_tambahan": 0 }
+    ],
+    "link_foto_utama": "https://alfagift.id/_ipx/f_webp,q_80/https://cdn.takdes.net/media/bo/product/ama/banner/pm_banner_251017_wblC.png",
+    "poin_kunci_untuk_leap": [ "Rasa buah yang kuat (Aroma Citrus)", "Pilihan populer untuk pembeli awal", "Stok tersedia banyak" ]
+  },
+  {
+    "kode_sku": "TEA-LEM-002",
+    "nama_produk_id": "Teh Lemon Pegunungan Segar",
+    "nama_produk_kh": "តែក្រូចឆ្មារភ្នំ (Te Krouch Chhmar Phnom)",
+    "deskripsi_singkat_id": "Teh hitam pilihan dengan aroma lemon alami yang menyegarkan. Sempurna untuk es teh.",
+    "kategori": "Minuman",
+    "harga": {
+      "idr": 55000,
+      "usd": 3.67,
+      "thb": 135.00,
+      "khr": 14500
+    },
+    "satuan_berat": "100g",
+    "stok_tersedia": true,
+    "varian": [
+      { "nama": "Kemasan Besar (200g)", "harga_tambahan": 10000 }
+    ],
+    "link_foto_utama": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Latte_and_dark_coffee.jpg/250px-Latte_and_dark_coffee.jpg",
+    "poin_kunci_untuk_leap": [ "Produk sangat segar, cepat habis", "Cocok untuk minuman dingin", "Rasa asam manis alami" ]
+  },
+  {
+    "kode_sku": "SKN-ALV-003",
+    "nama_produk_id": "Masker Wajah Pelembab Aloe Vera",
+    "nama_produk_kh": "ម៉ាស់មុខ អាឡូ វ៉េរ៉ា (Mas Muk Alo Vera)",
+    "deskripsi_singkat_id": "Sheet mask yang menenangkan dan melembapkan kulit. Mengurangi kemerahan.",
+    "kategori": "Perawatan Kulit",
+    "harga": {
+      "idr": 15000,
+      "usd": 1.00,
+      "thb": 35.00,
+      "khr": 4000
+    },
+    "satuan_berat": "25g/pcs",
+    "stok_tersedia": true,
+    "varian": [
+      { "nama": "Beli 5pcs", "harga_tambahan": 0 },
+      { "nama": "Beli Satuan", "harga_tambahan": 0 }
+    ],
+    "link_foto_utama": "https://i.ebayimg.com/images/g/VlAAAOSwK61gY90I/s-l1600.jpg",
+    "poin_kunci_untuk_leap": [ "Jual cepat/murah", "Cocok untuk kulit sensitif", "Produk terlaris untuk self-care" ]
+  },
+  {
+    "kode_sku": "FOD-BSC-004",
+    "nama_produk_id": "Biskuit Cokelat Krispi",
+    "nama_produk_kh": "នំស្រួយសូកូឡា (Nom Soury Sokhola)",
+    "deskripsi_singkat_id": "Biskuit dengan lapisan cokelat tebal. Sangat renyah, camilan sempurna untuk teh/kopi.",
+    "kategori": "Makanan Ringan",
+    "harga": {
+      "idr": 22000,
+      "usd": 1.47,
+      "thb": 55.00,
+      "khr": 6000
+    },
+    "satuan_berat": "150g",
+    "stok_tersedia": true,
+    "varian": [
+      { "nama": "Rasa Original", "harga_tambahan": 0 },
+      { "nama": "Rasa Keju", "harga_tambahan": 5000 }
+    ],
+    "link_foto_utama": "https://www.blibli.com/p/regal-marie-duo-biskuit-coklat-dan-original-80g-kemasan-pack/ps--RGH-60032-00045",
+    "poin_kunci_untuk_leap": [ "Cepat habis di setiap live", "Margin keuntungan tinggi", "Rasa familiar dan disukai" ]
+  },
+  {
+    "kode_sku": "MUP-LPT-005",
+    "nama_produk_id": "Lip Tint Glossy Warna Tahan Lama",
+    "nama_produk_kh": "លីប ថិន ពណ៌ (Lip Thin Por)",
+    "deskripsi_singkat_id": "Lip tint cair dengan hasil glossy yang ringan dan tahan hingga 8 jam.",
+    "kategori": "Kosmetik",
+    "harga": {
+      "idr": 78000,
+      "usd": 5.20,
+      "thb": 185.00,
+      "khr": 20000
+    },
+    "satuan_berat": "5ml",
+    "stok_tersedia": true,
+    "varian": [
+      { "nama": "Warna Peach", "harga_tambahan": 0 },
+      { "nama": "Warna Coral", "harga_tambahan": 0 }
+    ],
+    "link_foto_utama": "https://i.etsystatic.com/11267571/r/il/6b68a6/2647715099/il_fullxfull.2647715099_p1t9.jpg",
+    "poin_kunci_untuk_leap": [ "Sangat populer di Asia Tenggara", "Tampilkan live demo di bibir", "Stok terbatas, jual cepat!" ]
+  },
+  {
+    "kode_sku": "COF-ROB-006",
+    "nama_produk_id": "Kopi Robusta Rasa Kuat",
+    "nama_produk_kh": "កាហ្វេ រ៉ូបឺស្តា ខ្លាំង (Kafe Robusta Khlang)",
+    "deskripsi_singkat_id": "Rasa pahit yang pekat, cocok untuk kopi susu atau kopi hitam kental.",
+    "kategori": "Minuman",
+    "harga": {
+      "idr": 75000,
+      "usd": 5.00,
+      "thb": 180.00,
+      "khr": 19500
+    },
+    "satuan_berat": "250g",
+    "stok_tersedia": true,
+    "varian": [
+      { "nama": "Biji Utuh", "harga_tambahan": 0 }
+    ],
+    "link_foto_utama": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Roasted-coffee-beans.jpg/1200px-Roasted-coffee-beans.jpg",
+    "poin_kunci_untuk_leap": [ "Rasa paling kuat di katalog", "Harga lebih terjangkau", "Jelaskan cara membuat kopi susu" ]
+  },
+  {
+    "kode_sku": "SKN-MEN-007",
+    "nama_produk_id": "Sabun Cuci Muka Pria Kontrol Minyak",
+    "nama_produk_kh": "សាប៊ូលាងមុខបុរស (Sabu Leang Muk Boros)",
+    "deskripsi_singkat_id": "Pembersih wajah yang menghilangkan minyak berlebih dan membersihkan pori-pori. Cool effect.",
+    "kategori": "Perawatan Kulit",
+    "harga": {
+      "idr": 45000,
+      "usd": 3.00,
+      "thb": 110.00,
+      "khr": 12000
+    },
+    "satuan_berat": "100ml",
+    "stok_tersedia": true,
+    "varian": [],
+    "link_foto_utama": "https://www.blibli.com/p/gillette-pembersih-wajah-oil-control-face-wash-pencuci-muka-pria-100g/ps--GID-60035-00057",
+    "poin_kunci_untuk_leap": [ "Fokus pada pelanggan pria", "Jelaskan manfaatnya (minyak/debu)", "Produk yang harus dibeli berulang" ]
+  },
+  {
+    "kode_sku": "FOD-SNP-008",
+    "nama_produk_id": "Keripik Singkong Pedas Balado",
+    "nama_produk_kh": "នំមីឈីបម្ទេស (Nom Mi Chib Mtes)",
+    "deskripsi_singkat_id": "Keripik singkong renyah dengan bumbu balado pedas manis. Buatan rumahan.",
+    "kategori": "Makanan Ringan",
+    "harga": {
+      "idr": 18000,
+      "usd": 1.20,
+      "thb": 45.00,
+      "khr": 5000
+    },
+    "satuan_berat": "200g",
+    "stok_tersedia": false,
+    "varian": [
+      { "nama": "Tingkat Pedas Maksimal", "harga_tambahan": 0 }
+    ],
+    "link_foto_utama": "https://i.ebayimg.com/images/g/JmAAAOSwb3dY8A3P/s-l1600.jpg",
+    "poin_kunci_untuk_leap": [ "Stok Kosong, jual Pre-Order", "Camilan saat nonton/nongkrong", "Cocok untuk pasar pedas" ]
+  },
+  {
+    "kode_sku": "BEA-PRF-009",
+    "nama_produk_id": "Parfum Unisex Segar Citrus & Woody",
+    "nama_produk_kh": "ទឹកអប់ យូនីសិច (Teuk Ob Unisex)",
+    "deskripsi_singkat_id": "Parfum dengan aroma netral, campuran citrus dan wangi kayu. Tahan 6 jam.",
+    "kategori": "Kosmetik",
+    "harga": {
+      "idr": 120000,
+      "usd": 8.00,
+      "thb": 290.00,
+      "khr": 31000
+    },
+    "satuan_berat": "30ml",
+    "stok_tersedia": true,
+    "varian": [],
+    "link_foto_utama": "https://i.etsystatic.com/13158095/r/il/6b5797/1516089851/il_fullxfull.1516089851_p1t9.jpg",
+    "poin_kunci_untuk_leap": [ "Jelaskan aroma (segar, tidak menyengat)", "Hadiah populer", "Tunjukkan botolnya secara detail" ]
+  },
+  {
+    "kode_sku": "SUP-VIT-010",
+    "nama_produk_id": "Suplemen Vitamin C & Zinc",
+    "nama_produk_kh": "វីតាមីន C (Vitamin C)",
+    "deskripsi_singkat_id": "Meningkatkan daya tahan tubuh. Praktis dalam kemasan sachet per hari.",
+    "kategori": "Suplemen",
+    "harga": {
+      "idr": 35000,
+      "usd": 2.33,
+      "thb": 85.00,
+      "khr": 9500
+    },
+    "satuan_berat": "10 sachet",
+    "stok_tersedia": true,
+    "varian": [],
+    "link_foto_utama": "https://i.etsystatic.com/26279169/r/il/9965d4/3440744955/il_fullxfull.3440744955_p1t9.jpg",
+    "poin_kunci_untuk_leap": [ "Targetkan kesehatan/musim pancaroba", "Dapat dibeli dalam jumlah besar", "Jelaskan manfaat energi" ]
+  }
+]

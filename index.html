@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog Produk Leap Crown Casino - Tropical Oasis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Selamat Datang di Toko Leap, dekat Crown Casino</h1>
+        <h2>សូមស្វាគមន៍! (Soum svaakom!)</h2>
+        <p>Pilih produk favorit Anda di bawah ini. Minimal Pembelian: ฿500 (THB).</p>
+    </header>
+    
+    <div id="search-container">
+        <input type="text" id="search-input" placeholder="Cari nama produk (Kopi, Masker, Biskuit, dll.)">
+    </div>
+
+    <nav id="filter-container">
+        </nav>
+    
+    <main id="container-produk">
+    </main>
+
+    <footer>
+        <p>© 2025 Leap Store. Dibuat dengan semangat Tropical Modern.</p>
+    </footer>
+    
+    <button id="tombol-keranjang" class="tombol-floating" onclick="tampilkanKeranjang()">
+        <i class="fas fa-shopping-cart"></i> 
+        <span id="badge-keranjang">0</span>
+    </button>
+    
+    <div id="modal-keranjang" class="modal">
+        <div class="modal-konten">
+            <span class="tutup-modal" onclick="tutupKeranjang()">&times;</span>
+            <h2><i class="fas fa-shopping-basket"></i> Keranjang Belanja Anda</h2>
+            
+            <div id="daftar-item-keranjang">
+            </div>
+            
+            <hr>
+            
+            <div class="summary-keranjang">
+                <p>Total Harga (THB): <span id="total-keranjang-thb" class="harga-total">฿ 0.00</span></p>
+                <div id="pesan-validasi"></div>
+            </div>
+            
+            <div class="tombol-pesan-container">
+                <p class="pesan-kontak">Kirim pesanan Anda melalui:</p>
+                <button id="checkout-wa" class="tombol-checkout whatsapp" onclick="checkout('whatsapp')">
+                    <i class="fab fa-whatsapp"></i> Pesan via WhatsApp
+                </button>
+                <button id="checkout-tele" class="tombol-checkout telegram" onclick="checkout('telegram')">
+                    <i class="fab fa-telegram-plane"></i> Pesan via Telegram
+                </button>
+                <button id="checkout-fb" class="tombol-checkout facebook" onclick="checkout('facebook')">
+                    <i class="fab fa-facebook-f"></i> Pesan via Messenger
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
