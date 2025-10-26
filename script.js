@@ -132,7 +132,7 @@ function tampilkanProduk(produkArray) {
 
     // Tampilkan pesan jika tidak ada produk setelah filter
     if (produkArray.length === 0) {
-         container.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; color: #C87C5C; font-size: 1.2em; padding: 40px;">
+         container.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; color: #1A237E; font-size: 1.2em; padding: 40px;">
             Maaf, tidak ada produk ditemukan dalam pencarian atau kategori ini.</p>`;
         return;
     }
