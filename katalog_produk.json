@@ -4,6 +4,7 @@
     "nama_produk_id": "Kopi Arabika Premium Kintamani",
     "nama_produk_kh": "កាហ្វេអារ៉ាប៊ីកាឃីនតាម៉ានីពិសេស (Kafe Arabika Kintamani Piseth)",
     "deskripsi_singkat_id": "Biji kopi sangrai kualitas tinggi dengan aroma citrus dan nutty. Cocok untuk manual brew.",
+    "kategori": "Minuman",
     "harga": {
       "idr": 95000,
       "usd": 6.33,
@@ -24,6 +25,7 @@
     "nama_produk_id": "Teh Lemon Pegunungan Segar",
     "nama_produk_kh": "តែក្រូចឆ្មារភ្នំ (Te Krouch Chhmar Phnom)",
     "deskripsi_singkat_id": "Teh hitam pilihan dengan aroma lemon alami yang menyegarkan. Sempurna untuk es teh.",
+    "kategori": "Minuman",
     "harga": {
       "idr": 55000,
       "usd": 3.67,
@@ -43,6 +45,7 @@
     "nama_produk_id": "Masker Wajah Pelembab Aloe Vera",
     "nama_produk_kh": "ម៉ាស់មុខ អាឡូ វ៉េរ៉ា (Mas Muk Alo Vera)",
     "deskripsi_singkat_id": "Sheet mask yang menenangkan dan melembapkan kulit. Mengurangi kemerahan.",
+    "kategori": "Perawatan Kulit",
     "harga": {
       "idr": 15000,
       "usd": 1.00,
@@ -63,6 +66,7 @@
     "nama_produk_id": "Biskuit Cokelat Krispi",
     "nama_produk_kh": "នំស្រួយសូកូឡា (Nom Soury Sokhola)",
     "deskripsi_singkat_id": "Biskuit dengan lapisan cokelat tebal. Sangat renyah, camilan sempurna untuk teh/kopi.",
+    "kategori": "Makanan Ringan",
     "harga": {
       "idr": 22000,
       "usd": 1.47,
@@ -83,6 +87,7 @@
     "nama_produk_id": "Lip Tint Glossy Warna Tahan Lama",
     "nama_produk_kh": "លីប ថិន ពណ៌ (Lip Thin Por)",
     "deskripsi_singkat_id": "Lip tint cair dengan hasil glossy yang ringan dan tahan hingga 8 jam.",
+    "kategori": "Kosmetik",
     "harga": {
       "idr": 78000,
       "usd": 5.20,
@@ -103,6 +108,7 @@
     "nama_produk_id": "Kopi Robusta Rasa Kuat",
     "nama_produk_kh": "កាហ្វេ រ៉ូបឺស្តា ខ្លាំង (Kafe Robusta Khlang)",
     "deskripsi_singkat_id": "Rasa pahit yang pekat, cocok untuk kopi susu atau kopi hitam kental.",
+    "kategori": "Minuman",
     "harga": {
       "idr": 75000,
       "usd": 5.00,
@@ -122,6 +128,7 @@
     "nama_produk_id": "Sabun Cuci Muka Pria Kontrol Minyak",
     "nama_produk_kh": "សាប៊ូលាងមុខបុរស (Sabu Leang Muk Boros)",
     "deskripsi_singkat_id": "Pembersih wajah yang menghilangkan minyak berlebih dan membersihkan pori-pori. Cool effect.",
+    "kategori": "Perawatan Kulit",
     "harga": {
       "idr": 45000,
       "usd": 3.00,
@@ -139,6 +146,7 @@
     "nama_produk_id": "Keripik Singkong Pedas Balado",
     "nama_produk_kh": "នំមីឈីបម្ទេស (Nom Mi Chib Mtes)",
     "deskripsi_singkat_id": "Keripik singkong renyah dengan bumbu balado pedas manis. Buatan rumahan.",
+    "kategori": "Makanan Ringan",
     "harga": {
       "idr": 18000,
       "usd": 1.20,
@@ -158,6 +166,7 @@
     "nama_produk_id": "Parfum Unisex Segar Citrus & Woody",
     "nama_produk_kh": "ទឹកអប់ យូនីសិច (Teuk Ob Unisex)",
     "deskripsi_singkat_id": "Parfum dengan aroma netral, campuran citrus dan wangi kayu. Tahan 6 jam.",
+    "kategori": "Kosmetik",
     "harga": {
       "idr": 120000,
       "usd": 8.00,
@@ -175,6 +184,7 @@
     "nama_produk_id": "Suplemen Vitamin C & Zinc",
     "nama_produk_kh": "វីតាមីន C (Vitamin C)",
     "deskripsi_singkat_id": "Meningkatkan daya tahan tubuh. Praktis dalam kemasan sachet per hari.",
+    "kategori": "Suplemen",
     "harga": {
       "idr": 35000,
       "usd": 2.33,
@@ -184,7 +194,7 @@
     "satuan_berat": "10 sachet",
     "stok_tersedia": true,
     "varian": [],
-    "link_foto_utama": "https://i.etsystatic.com/26279169/r/il/9965d8/3440744955/il_fullxfull.3440744955_p1t9.jpg",
+    "link_foto_utama": "https://i.etsystatic.com/26279169/r/il/9965d4/3440744955/il_fullxfull.3440744955_p1t9.jpg",
     "poin_kunci_untuk_leap": [ "Targetkan kesehatan/musim pancaroba", "Dapat dibeli dalam jumlah besar", "Jelaskan manfaat energi" ]
   }
 ]
