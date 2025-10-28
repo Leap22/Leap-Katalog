@@ -1,6 +1,6 @@
 /* ==========================================================
    STYLE SHEET LENGKAP & RESPONSIVE - FINAL VERSION
-   (PERBAIKAN: Tombol Bahasa dan Search yang lebih Menonjol)
+   (Memastikan semua elemen ada dan terlihat)
    ========================================================== */
 
 /* ----------------------------------------------------------
@@ -19,13 +19,19 @@ body {
     line-height: 1.6;
 }
 
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
 /* ----------------------------------------------------------
    1. HEADER DAN NAVIGASI (Bahasa & Keranjang)
    ---------------------------------------------------------- */
 header {
     background-color: #ffffff;
     padding: 15px 10px;
-    border-bottom: 2px solid #007bff; /* Garis bawah biru yang menonjol */
+    border-bottom: 2px solid #004d40; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
@@ -37,476 +43,617 @@ header {
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap; 
+    align-items: flex-start;
+    flex-wrap: wrap;
 }
 
 .logo-container {
-    padding-right: 20px;
+    flex-grow: 1;
+    color: #004d40;
 }
+.logo-container h1 { font-size: 1.8em; margin-bottom: 0px; }
+.logo-container h2 { font-size: 1em; font-weight: normal; margin-top: 0px; }
+.logo-container p { font-size: 0.9em; color: #555; margin-top: 5px; }
 
-.logo-container h1 {
-    font-size: 1.5em;
-    color: #004d40; 
-    font-weight: 700;
-}
-
-.logo-container h2, .logo-container p {
-    font-size: 0.9em;
-    color: #555;
-    margin-top: 2px;
-}
-
-h2[id^="header-subtitle-"], p[id^="header-text-"] {
-    display: none;
-}
-
-/* Kontrol Keranjang dan Bahasa */
 .kontrol-nav {
     display: flex;
     align-items: center;
     gap: 15px;
+    margin-top: 10px;
 }
 
 .tombol-keranjang-nav {
-    background: #dc3545; 
+    background-color: #d32f2f;
     color: white;
+    padding: 10px 15px;
     border: none;
-    padding: 10px 18px;
-    border-radius: 5px;
+    border-radius: 25px;
     cursor: pointer;
     font-size: 1em;
+    font-weight: bold;
     display: flex;
     align-items: center;
-    position: relative;
+    gap: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s;
-    font-weight: bold;
 }
 
 .tombol-keranjang-nav:hover {
-    background-color: #c82333;
+    background-color: #c62828;
 }
 
-#badge-keranjang {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background-color: #007bff; 
-    color: white;
+#keranjang-count {
+    background-color: #fff;
+    color: #d32f2f;
     border-radius: 50%;
-    padding: 3px 7px;
-    font-size: 0.7em;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8em;
     font-weight: bold;
-    min-width: 20px;
-    text-align: center;
+    margin-left: -5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* PERBAIKAN: Tombol Bahasa Dibuat Lebih Menonjol dan Rapi */
 #language-selector-fixed {
-    max-width: 1200px;
-    margin: 0 auto;
     display: flex;
-    flex-wrap: wrap; 
-    gap: 8px; 
+    gap: 8px;
+    padding: 5px 0;
     margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 5px;
-    border-radius: 5px;
-    background-color: #e9ecef; 
 }
+
 .tombol-bahasa {
-    background: #f8f9fa; 
+    background-color: #e0e0e0;
     color: #333;
-    border: 1px solid #ced4da;
-    padding: 6px 10px;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 0.85em;
-    font-weight: 600; 
-    transition: all 0.2s;
+    font-size: 0.9em;
+    transition: background-color 0.3s, border-color 0.3s;
 }
-.tombol-bahasa.active {
-    background-color: #28a745;
+
+.tombol-bahasa.aktif {
+    background-color: #004d40;
     color: white;
-    border-color: #218838;
+    border-color: #004d40;
+}
+.tombol-bahasa:hover:not(.aktif) {
+    background-color: #d0d0d0;
+}
+
+/* Notifikasi Pop-up */
+#notifikasi-container {
+    position: fixed;
+    top: 70px; /* Di bawah header sticky */
+    right: 15px;
+    z-index: 1000;
+}
+
+.notifikasi {
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    color: white;
     font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transform: translateX(0);
 }
-.tombol-bahasa:hover:not(.active) {
-    background-color: #e2e6ea;
+
+.notifikasi.sukses {
+    background-color: #28a745;
 }
+.notifikasi.peringatan {
+    background-color: #ffc107;
+    color: #333;
+}
+.notifikasi.fade-out {
+    opacity: 0;
+    transform: translateX(100%);
+}
+.notifikasi i {
+    margin-right: 8px;
+}
+
 
 /* ----------------------------------------------------------
-   2. SEARCH DAN FILTER
+   2. SEARCH & FILTER
    ---------------------------------------------------------- */
-.konten-utama {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 0 10px;
-}
-
-.search-filter-container {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #ffffff; 
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-/* PERBAIKAN: Kolom Pencarian Dibuat Lebih Besar dan Kontras */
-#search-input {
-    width: 100%;
-    padding: 14px 18px; 
-    border: 2px solid #ccc; 
-    border-radius: 8px;
-    font-size: 1.1em; 
-    margin-bottom: 15px;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-#search-input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
-    outline: none;
-}
-
-#filter-container {
+.kontrol-produk {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 15px;
+    gap: 15px;
+    margin: 20px 0;
+    align-items: center;
+}
+
+#search-input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    font-size: 1em;
+    max-width: 300px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#filter-kategori {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    flex-grow: 3;
+    justify-content: flex-start;
 }
 
 .tombol-filter {
-    background: #f0f0f0;
-    color: #495057;
-    border: 1px solid #ccc;
-    padding: 9px 16px; 
+    background-color: #fff;
+    color: #004d40;
+    border: 1px solid #004d40;
+    padding: 8px 15px;
     border-radius: 20px;
     cursor: pointer;
     font-size: 0.9em;
-    white-space: nowrap; 
     transition: all 0.3s;
-    font-weight: 600;
 }
 
-.tombol-filter.aktif, .tombol-filter:hover {
-    background-color: #007bff;
+.tombol-filter:hover {
+    background-color: #e6f7ff;
+}
+
+.tombol-filter.aktif {
+    background-color: #004d40;
     color: white;
-    border-color: #007bff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* ----------------------------------------------------------
-   3. KATALOG PRODUK (GRID LAYOUT)
+   3. PROMO BANNER (Baru)
+   ---------------------------------------------------------- */
+.promo-banner {
+    background: linear-gradient(45deg, #ffeb3b, #ff9800);
+    color: #333;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.promo-banner h3 {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+.promo-banner p {
+    font-size: 1.1em;
+    color: #d32f2f;
+}
+
+
+/* ----------------------------------------------------------
+   4. KARTU PRODUK (GRID UTAMA)
    ---------------------------------------------------------- */
 #container-produk {
-    /* DEFAULT: 3 Kolom untuk Desktop Besar */
     display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 20px; 
-    padding: 0;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 25px;
+    padding-top: 10px;
 }
 
 .kartu-produk {
     background-color: white;
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s, box-shadow 0.2s;
-    height: 100%; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
     display: flex;
     flex-direction: column;
+    position: relative; /* Penting untuk badge diskon */
 }
 
 .kartu-produk:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .kartu-produk img {
-    /* PENTING: Aspek Rasio 1:1 untuk Simetri Gambar */
-    display: block;
     width: 100%;
-    aspect-ratio: 1 / 1; 
-    object-fit: cover; 
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
 }
 
 .detail-produk {
-    padding: 10px;
-    flex-grow: 1; 
+    padding: 15px;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
 .nama-utama {
-    line-height: 1.3;
-    margin-top: 5px !important; 
-    margin-bottom: 5px !important;
+    margin-bottom: 5px;
+    line-height: 1.2;
+    min-height: 40px; /* Memastikan ruang yang cukup */
 }
 
-.kode-sku-info {
-    margin-top: 5px !important;
-    margin-bottom: 3px !important;
+.deskripsi-produk {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 10px;
 }
 
 .selling-points-container {
-    margin-top: 5px !important; 
-    margin-bottom: 5px !important;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+.selling-points-container ul {
+    list-style: none;
+}
+.selling-points-container li {
+    font-size: 0.85em;
+    color: #333;
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
+.kode-sku-info {
+    font-size: 0.8em;
+    color: #999;
+    margin-top: auto; /* Dorong ke bawah */
+    margin-bottom: 8px;
+}
+
+/* Style untuk Harga dan Tombol */
 .multi-currency-price-compact {
     display: flex;
     justify-content: space-between;
-    gap: 5px;
-    margin-top: 5px !important; 
-    margin-bottom: 5px !important;
+    align-items: flex-end;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #d32f2f;
+    margin-bottom: 15px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.multi-currency-price-compact div:nth-child(2) {
+    color: #333; /* Warna sekunder */
+    font-size: 0.8em;
+}
+.multi-currency-price-compact div:nth-child(3) {
+    color: #004d40; /* Warna utama (THB) */
+    font-size: 1.1em;
 }
 
-.multi-currency-price-compact div {
-    font-size: 0.95em !important; 
+
+/* --- Style Diskon Baru --- */
+.badge-diskon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #d32f2f; /* Merah */
+    color: white;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    font-weight: bold;
+    border-radius: 12px 0 12px 0;
+    z-index: 10;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+}
+
+.multi-currency-price-compact .harga-asli {
+    text-decoration: line-through;
+    color: #999; 
+    font-size: 0.8em;
+    font-weight: normal;
+    margin-bottom: 2px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+}
+.multi-currency-price-compact .harga-asli-thb {
+    margin-left: 0;
+}
+/* --- Akhir Style Diskon Baru --- */
+
+
+.tombol-sosial-container {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.tombol-keranjang {
+    background-color: #004d40;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    width: 100%;
+    transition: background-color 0.3s, opacity 0.3s;
+}
+
+.tombol-keranjang:hover:not(.disabled) {
+    background-color: #00332d;
+}
+
+.tombol-keranjang.disabled, .kartu-produk.stok-habis .tombol-keranjang {
+    background-color: #aaa;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.tombol-preorder {
+    background-color: #ff9800;
+}
+.tombol-preorder:hover:not(.disabled) {
+    background-color: #f57c00;
 }
 
 .kartu-produk.stok-habis {
     opacity: 0.6;
 }
-
-.tombol-sosial-container {
-    margin-top: auto; 
-    padding-top: 10px;
-    text-align: center;
-}
-
-.tombol-keranjang {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: bold;
-    width: 100%; 
-    transition: background-color 0.3s;
-}
-
-.tombol-keranjang:hover:not(.disabled) {
-    background-color: #1e7e34;
-}
-
-.tombol-keranjang.disabled {
-    background-color: #6c757d;
-    cursor: not-allowed;
-    opacity: 0.8;
-}
-
-.tombol-keranjang.tombol-preorder {
-    background-color: #ffc107;
-    color: #333;
-}
-.tombol-keranjang.tombol-preorder:hover:not(.disabled) {
-    background-color: #e0a800;
+.kartu-produk.stok-habis img {
+    filter: grayscale(80%);
 }
 
 /* ----------------------------------------------------------
-   4. MODAL KERANJANG
+   5. MODAL KERANJANG
    ---------------------------------------------------------- */
-#modal-keranjang {
+.modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 200;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .modal-konten {
     background-color: #fefefe;
-    margin: 10% auto;
+    margin: 5% auto; /* Jarak dari atas dan tengah */
     padding: 20px;
     border-radius: 10px;
-    width: 90%;
-    max-width: 450px;
+    width: 80%; 
+    max-width: 700px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    position: relative;
-    animation: fadeIn 0.3s;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+.modal-konten h2 {
+    color: #004d40;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.tutup {
+.tombol-tutup {
     color: #aaa;
-    float: right;
     font-size: 28px;
     font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.3s;
 }
 
-.tutup:hover,
-.tutup:focus {
-    color: #000;
+.tombol-tutup:hover,
+.tombol-tutup:focus {
+    color: #d32f2f;
     text-decoration: none;
     cursor: pointer;
 }
 
-#daftar-item-keranjang {
-    max-height: 300px;
+.daftar-item-keranjang {
+    max-height: 400px;
     overflow-y: auto;
-    border-top: 1px solid #eee;
-    margin-top: 10px;
-    padding-top: 10px;
+    padding-right: 10px;
+    border: 1px solid #eee;
+    border-radius: 5px;
 }
 
 .item-keranjang {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 8px 0;
+    padding: 10px 0;
+    border-bottom: 1px dashed #ddd;
+}
+.item-keranjang:last-child {
+    border-bottom: none;
+}
+
+.item-keranjang img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 15px;
+    flex-shrink: 0;
 }
 
 .info-item {
     flex-grow: 1;
 }
 .nama-item {
-    font-weight: 600;
-    display: block;
-}
-.nama-tambahan-keranjang {
-    color: #666;
-    font-style: italic;
-}
-.harga-item {
+    font-size: 1em;
     font-weight: bold;
-    color: #007bff;
-    font-size: 0.9em;
-    display: block;
-    margin-top: 2px;
+    margin-bottom: 3px;
+    color: #333;
 }
 
-.kontrol-item button {
-    background: #007bff;
-    color: white;
+.harga-item {
+    font-size: 0.9em;
+    color: #004d40;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.subtotal-item {
+    font-size: 0.85em;
+    color: #555;
+    margin-top: 3px;
+}
+
+/* Style harga asli di keranjang */
+.harga-asli-keranjang {
+    text-decoration: line-through;
+    color: #999;
+    font-weight: normal;
+    margin-right: 8px;
+}
+
+
+.kontrol-kuantitas {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+}
+
+.kontrol-kuantitas button {
+    background-color: #e0e0e0;
     border: none;
-    padding: 5px 8px;
-    margin-left: 5px;
+    width: 30px;
+    height: 30px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 0.8em;
+    font-weight: bold;
+    transition: background-color 0.2s;
 }
-.kontrol-item button.hapus-item {
-    background-color: #dc3545;
+.kontrol-kuantitas button:hover {
+    background-color: #ccc;
+}
+.kontrol-kuantitas .tombol-hapus {
+    background-color: #d32f2f;
+    color: white;
+    width: 35px;
+}
+.kontrol-kuantitas .tombol-hapus:hover {
+    background-color: #c62828;
 }
 
 .ringkasan-total {
-    border-top: 2px solid #333;
-    padding-top: 10px;
-    margin-top: 15px;
-    font-size: 1.1em;
+    text-align: right;
+    font-size: 1.4em;
     font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    color: #d32f2f;
+    padding: 10px 0;
+    border-top: 2px solid #004d40;
+    margin-top: 15px;
+}
+.ringkasan-total span {
+    color: #004d40;
+    margin-left: 10px;
 }
 
-.pesan-validasi .error-msg {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-    padding: 8px;
-    border-radius: 5px;
+.pesan-validasi {
+    color: #d32f2f;
+    text-align: right;
+    margin-bottom: 10px;
+    font-weight: bold;
     font-size: 0.9em;
-}
-
-.pesan-validasi .success-msg {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-    padding: 8px;
-    border-radius: 5px;
-    font-size: 0.9em;
+    display: none; /* Disembunyikan secara default */
 }
 
 .checkout-container {
+    text-align: right;
     margin-top: 15px;
-    text-align: center;
 }
+
 .pesan-kontak {
     font-size: 0.9em;
     color: #555;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 
-.tombol-checkout {
-    width: 100%;
-    padding: 12px;
-    margin: 5px 0;
+#checkout-wa-button {
+    background-color: #25d366; /* Warna WhatsApp */
+    color: white;
+    padding: 12px 25px;
     border: none;
-    border-radius: 5px;
-    font-weight: bold;
+    border-radius: 25px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s, opacity 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.tombol-checkout.whatsapp {
-    background-color: #25d366;
-    color: white;
-}
-.tombol-checkout.telegram {
-    background-color: #0088cc;
-    color: white;
+#checkout-wa-button:hover:not(:disabled) {
+    background-color: #128c7e;
 }
 
-.tombol-checkout.disabled {
-    background-color: #ccc;
+#checkout-wa-button:disabled {
+    background-color: #aaa;
     cursor: not-allowed;
-    opacity: 0.8;
+    opacity: 0.7;
+}
+
+/* ----------------------------------------------------------
+   6. FOOTER
+   ---------------------------------------------------------- */
+footer {
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 40px;
+    border-top: 1px solid #ccc;
+    color: #777;
+    font-size: 0.85em;
 }
 
 
 /* ----------------------------------------------------------
-   5. MEDIA QUERIES (RESPONSIVE)
+   7. RESPONSIVENESS
    ---------------------------------------------------------- */
-
-/* Tampilan Tablet (Layar 601px hingga 1024px) */
-@media (max-width: 1024px) {
+@media (max-width: 992px) {
     #container-produk {
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 15px;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
     }
-    
-    .header-konten {
-        align-items: flex-start;
+    .kontrol-produk {
+        flex-direction: column;
+        align-items: stretch;
     }
-    .logo-container {
-        width: auto;
+    #search-input {
+        max-width: 100%;
+    }
+    #filter-kategori {
+        justify-content: center;
     }
     .kontrol-nav {
-        margin-left: auto;
+        justify-content: space-between; 
     }
     #language-selector-fixed {
-        width: 100%;
         justify-content: flex-start;
         margin-top: 15px;
         padding-left: 10px;
         padding-right: 10px;
     }
+    .modal-konten {
+        width: 95%; 
+        margin: 5% auto;
+    }
 }
 
 
-/* **TAMPILAN MOBILE KRITIS (Layar Max 600px) - UNTUK SIMETRI** */
 @media (max-width: 600px) {
     
-    /* A. Kontainer Produk: 1 kolom penuh */
     #container-produk {
         grid-template-columns: 1fr; 
         gap: 15px; 
     }
     
-    /* B. Header dan Navigasi */
     .header-konten {
         flex-direction: column;
         align-items: center;
@@ -522,7 +669,6 @@ h2[id^="header-subtitle-"], p[id^="header-text-"] {
         justify-content: space-evenly; 
         gap: 10px;
     }
-    /* Tombol Bahasa menyebar di mobile */
     #language-selector-fixed {
         width: 100%;
         justify-content: center;
@@ -532,37 +678,15 @@ h2[id^="header-subtitle-"], p[id^="header-text-"] {
     }
     .tombol-bahasa {
         padding: 5px 8px;
-        font-size: 0.8em;
     }
-
-    /* C. Search dan Filter */
-    .search-filter-container {
-        padding: 10px;
+    .item-keranjang {
+        flex-wrap: wrap;
     }
-    #search-input {
-        padding: 10px 15px;
-        font-size: 1em;
+    .info-item, .kontrol-kuantitas {
+        width: 100%;
+        margin-top: 10px;
     }
-    .tombol-filter {
-        font-size: 0.8em;
-        padding: 6px 10px;
-    }
-    
-    /* D. Detail Produk */
-    .detail-produk {
-        padding: 8px;
-    }
-    .nama-utama {
-        font-size: 1.05em !important; 
-    }
-    .multi-currency-price-compact div {
-        padding: 6px 4px !important;
-        font-size: 0.85em !important;
-    }
-
-    /* E. Tombol Keranjang di Kartu */
-    .tombol-keranjang {
-        font-size: 0.9em;
-        padding: 10px 5px;
+    .item-keranjang img {
+        margin-right: 10px;
     }
 }
