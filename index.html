@@ -9,6 +9,8 @@
 </head>
 <body>
 
+    <div id="notifikasi-container"></div>
+
     <header>
         <div class="header-konten">
             <div class="logo-container">
@@ -20,66 +22,72 @@
                 <h2 id="header-subtitle-en" style="display:none;">near Crown Casino</h2>
                 <p id="header-text-en" style="display:none;">Select your favorite products below. Minimum Purchase: ฿500 (THB).</p>
                 
-                </div>
-
+                <h1 id="header-title-kh" style="display:none;">សូមស្វាគមន៍មកកាន់ Leap Store</h1>
+                <h2 id="header-subtitle-kh" style="display:none;">នៅជិត Crown Casino</h2>
+                <p id="header-text-kh" style="display:none;">ជ្រើសរើសផលិតផលដែលអ្នកចូលចិត្តនៅខាងក្រោម។ ការទិញអប្បបរមា: ฿500 (THB)។</p>
+            </div>
+            
             <div class="kontrol-nav">
-                <button class="tombol-keranjang-nav" onclick="bukaModalKeranjang()">
-                    <i class="fas fa-shopping-cart"></i> Keranjang
-                    <span id="badge-keranjang">0</span>
+                <div id="language-selector-fixed">
+                    </div>
+
+                <button id="keranjang-button" class="tombol-keranjang-nav">
+                    <i class="fas fa-shopping-cart"></i> 
+                    <span id="keranjang-button-text">Keranjang</span>
+                    <span id="keranjang-count" style="display:none;"></span>
                 </button>
             </div>
         </div>
-        
-        <div class="header-konten">
-            <div id="language-selector-fixed">
-                </div>
-        </div>
     </header>
 
-    <div class="konten-utama">
+    <div class="container">
         
-        <div class="search-filter-container">
-            <input type="text" id="search-input" placeholder="Cari produk..">
+        <div class="promo-banner">
+            <h3>PROMO FLASH SALE!</h3>
+            <p>Diskon 10% untuk Minuman Racikan & Segar (Hanya sebelum jam 15:00)</p>
+        </div>
 
-            <div id="filter-container">
+        <div class="kontrol-produk">
+            <input type="text" id="search-input" placeholder="Cari produk..." aria-label="Kolom Pencarian">
+            
+            <div id="filter-kategori">
                 </div>
         </div>
-
-        <div id="promo-banner" style="display: none; background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 20px; text-align: center; border-radius: 8px; margin-bottom: 20px;">
-            <h3 id="promo-title-id">Promo Minuman Sehat (10% OFF)</h3>
-            <p id="promo-desc-id">Dapatkan diskon 10% untuk semua Minuman Racikan hari ini. Klik untuk memesan!</p>
-            <button id="promo-button" style="background-color: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 10px; cursor: pointer;">Lihat Promo</button>
-
-            <h3 id="promo-title-en" style="display:none;">Healthy Drink Promo (10% OFF)</h3>
-            <p id="promo-desc-en" style="display:none;">Get 10% off all Blended Fruit Juices today. Click to order!</p>
-        </div>
-
-
+        
         <div id="container-produk">
             </div>
     </div>
 
+    <footer>
+        &copy; 2024 Leap Store. Semua hak dilindungi. | Dibuat dengan ❤️ untuk layanan terbaik.
+    </footer>
+
     <div id="modal-keranjang" class="modal">
         <div class="modal-konten">
-            <span class="tutup" onclick="tutupModalKeranjang()">&times;</span>
-            <h2>Keranjang Belanja Anda</h2>
+            <h2>
+                <span id="modal-title-id">Keranjang Belanja Anda</span>
+                <span id="modal-title-en" style="display:none;">Your Shopping Cart</span>
+                <span id="modal-title-kh" style="display:none;">រទេះដើរទិញឥវ៉ាន់របស់អ្នក។</span>
+                <span class="tombol-tutup">&times;</span>
+            </h2>
 
-            <div id="daftar-item-keranjang">
+            <div id="daftar-item-keranjang" class="daftar-item-keranjang">
                 </div>
 
-            <p class="ringkasan-total">Total: <span id="total-keranjang">฿0.00</span></p>
+            <p class="ringkasan-total" id="ringkasan-total-id">Total: <span id="total-keranjang">Rp 0</span></p>
+            <p class="ringkasan-total" id="ringkasan-total-en" style="display:none;">Total: <span id="total-keranjang-en">$ 0.00</span></p>
+            <p class="ringkasan-total" id="ringkasan-total-kh" style="display:none;">សរុប: <span id="total-keranjang-kh">KHR 0</span></p>
+
 
             <div id="pesan-validasi" class="pesan-validasi">
                 </div>
 
             <div class="checkout-container">
-                <p class="pesan-kontak">Lanjutkan ke pemesanan via kontak:</p>
-                <button class="tombol-checkout whatsapp" id="checkout-whatsapp" onclick="checkout('whatsapp')">
-                    <i class="fab fa-whatsapp"></i> Checkout via WhatsApp
-                </button>
-                <button class="tombol-checkout telegram" id="checkout-telegram" onclick="checkout('telegram')">
-                    <i class="fab fa-telegram-plane"></i> Checkout via Telegram
-                </button>
+                <p class="pesan-kontak" id="pesan-kontak-id">Lanjutkan ke pemesanan via kontak:</p>
+                <p class="pesan-kontak" id="pesan-kontak-en" style="display:none;">Proceed to ordering via contact:</p>
+                <p class="pesan-kontak" id="pesan-kontak-kh" style="display:none;">បន្តទៅការបញ្ជាទិញតាមរយៈទំនាក់ទំនង:</p>
+
+                <button id="checkout-wa-button" disabled>Pesan via WhatsApp</button>
             </div>
         </div>
     </div>
